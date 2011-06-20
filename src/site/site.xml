@@ -28,13 +28,10 @@
             <item name="sf.net/cyclops-group"
                 href="http://sourceforge.net/projects/cyclops-group" />
         </links>
-        <menu name="JCLI">
-            <item name="Home" href="index.html" />
-            <item name="Documentation Wiki" href="http://wiki.cyclopsgroup.org/jcli" />
-            <item name="Javadoc" href="apidocs/index.html" />
-        </menu>
         <menu ref="reports" />
         <menu name="Links">
+            <item name="Documentation Wiki" href="http://wiki.cyclopsgroup.org/jcli" />
+            <item name="Javadoc" href="apidocs/index.html" />
             <item name="Discussion" href="http://wiki.cyclopsgroup.org/discussion" />
             <item name="Jmxterm"
                 href="http://www.cyclopsgroup.org/projects/jmxterm" />
