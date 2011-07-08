@@ -25,12 +25,12 @@ class MultiValueReference<T>
      * @param values List of values to set
      */
     @SuppressWarnings( "unchecked" )
-    void setValues( T bean, List<String> values )
+    <P> void setValues( T bean, List<String> values )
     {
-        Collection col;
+        Collection<P> col;
         try
         {
-            col = (Collection) listType.newInstance();
+            col = (Collection<P>) listType.newInstance();
         }
         catch ( InstantiationException e )
         {
@@ -42,7 +42,7 @@ class MultiValueReference<T>
         }
         for ( String value : values )
         {
-            col.add( converter.fromCharacters( value ) );
+            col.add( (P) converter.fromCharacters( value ) );
         }
         ref.writeValue( col, bean );
     }

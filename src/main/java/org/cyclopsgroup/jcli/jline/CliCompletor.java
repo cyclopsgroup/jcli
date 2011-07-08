@@ -85,7 +85,7 @@ public class CliCompletor
     /**
      * @inheritDoc
      */
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings( { "unchecked", "rawtypes" } )
     public int complete( final String command, final int cursor, final List suggestions )
     {
         ArgumentsInspector inspector = new ArgumentsInspector( context );

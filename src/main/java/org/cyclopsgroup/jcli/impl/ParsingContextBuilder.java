@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.cyclopsgroup.caff.conversion.AnnotatedConverter;
 import org.cyclopsgroup.caff.conversion.Converter;
-import org.cyclopsgroup.caff.conversion.NullFriendlyConverter;
-import org.cyclopsgroup.caff.conversion.SimpleConverter;
 import org.cyclopsgroup.caff.ref.ValueReference;
 import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
@@ -30,22 +28,17 @@ import org.cyclopsgroup.jcli.annotation.Option;
 class ParsingContextBuilder<T>
 {
     @SuppressWarnings( "unchecked" )
-    private static <T> Reference<T> createReference( Class<T> beanType, PropertyDescriptor descriptor, String longName )
+    private static <T, P> Reference<T> createReference( Class<T> beanType, PropertyDescriptor descriptor,
+                                                        String longName )
     {
-        Method writer = descriptor.getWriteMethod();
-
-        Class<?> valueType = descriptor.getPropertyType();
-
+        Class<P> valueType = (Class<P>) descriptor.getPropertyType();
         MultiValue multiValue = getAnnotation( descriptor, MultiValue.class );
         if ( multiValue != null )
         {
-            valueType = multiValue.valueType();
+            valueType = (Class<P>) multiValue.valueType();
         }
 
-        Converter internalConverter =
-            AnnotatedConverter.isConversionSupported( writer ) ? new AnnotatedConverter( valueType, writer )
-                            : new SimpleConverter( valueType );
-        Converter converter = new NullFriendlyConverter( internalConverter );
+        Converter<P> converter = new AnnotatedConverter<P>( valueType, descriptor );
         ValueReference<T> reference = ValueReference.instanceOf( descriptor );
         if ( multiValue != null )
         {
