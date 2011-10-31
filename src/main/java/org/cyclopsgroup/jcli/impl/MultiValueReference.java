@@ -21,6 +21,7 @@ class MultiValueReference<T>
     /**
      * Write multi value to bean
      *
+     * @param <P> Type of value to convert
      * @param bean Bean to set values
      * @param values List of values to set
      */
