@@ -16,7 +16,7 @@ import org.cyclopsgroup.jcli.annotation.Option;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Cli( name = "sample", description = "A test" )
-public class ExampleNormalBean
+public class Simple
     implements AutoCompletable
 {
     /**

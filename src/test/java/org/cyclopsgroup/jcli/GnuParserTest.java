@@ -23,9 +23,9 @@ public class GnuParserTest
     @Test
     public void testCombination()
     {
-        ArgumentProcessor<ExampleNormalBean> p =
-            ArgumentProcessor.newInstance( ExampleNormalBean.class, new GnuParser() );
-        ExampleNormalBean b = new ExampleNormalBean();
+        ArgumentProcessor<Simple> p =
+            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        Simple b = new Simple();
         p.process( new String[] { "-i", "123", "a", "-f", "abc", "b" }, b );
 
         assertEquals( 123, b.getIntField() );
@@ -40,8 +40,8 @@ public class GnuParserTest
     @Test
     public void testLongOptionWithDash()
     {
-        ArgumentProcessor<BeanWithoutCli> p = ArgumentProcessor.newInstance( BeanWithoutCli.class, new GnuParser() );
-        BeanWithoutCli b = new BeanWithoutCli();
+        ArgumentProcessor<WithoutCli> p = ArgumentProcessor.newInstance( WithoutCli.class, new GnuParser() );
+        WithoutCli b = new WithoutCli();
         p.process( new String[] { "--with-dash", "x" }, b );
         assertEquals( "x", b.optionWithDash );
     }
@@ -52,9 +52,9 @@ public class GnuParserTest
     @Test
     public void testNormalBeanWithoutValues()
     {
-        ArgumentProcessor<ExampleNormalBean> p =
-            ArgumentProcessor.newInstance( ExampleNormalBean.class, new GnuParser() );
-        ExampleNormalBean b = new ExampleNormalBean();
+        ArgumentProcessor<Simple> p =
+            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        Simple b = new Simple();
         p.process( new String[] { "-i", "123", "--field1", "abc" }, b );
 
         assertEquals( 123, b.getIntField() );
@@ -69,9 +69,9 @@ public class GnuParserTest
     @Test
     public void testSimpleArgumentWithMultiValues()
     {
-        ArgumentProcessor<ExampleBeanWithSimpleArgument> p =
-            ArgumentProcessor.newInstance( ExampleBeanWithSimpleArgument.class, new GnuParser() );
-        ExampleBeanWithSimpleArgument b = new ExampleBeanWithSimpleArgument();
+        ArgumentProcessor<WithSimpleArgument> p =
+            ArgumentProcessor.newInstance( WithSimpleArgument.class, new GnuParser() );
+        WithSimpleArgument b = new WithSimpleArgument();
         p.process( new String[] { "a", "b" }, b );
         assertEquals( "a", b.getArg() );
     }
@@ -82,9 +82,9 @@ public class GnuParserTest
     @Test
     public void testSimpleArgumentWithoutValue()
     {
-        ArgumentProcessor<ExampleBeanWithSimpleArgument> p =
-            ArgumentProcessor.newInstance( ExampleBeanWithSimpleArgument.class, new GnuParser() );
-        ExampleBeanWithSimpleArgument b = new ExampleBeanWithSimpleArgument();
+        ArgumentProcessor<WithSimpleArgument> p =
+            ArgumentProcessor.newInstance( WithSimpleArgument.class, new GnuParser() );
+        WithSimpleArgument b = new WithSimpleArgument();
         p.process( new String[] {}, b );
         assertNull( b.getArg() );
     }
@@ -95,9 +95,9 @@ public class GnuParserTest
     @Test
     public void testWithFlag()
     {
-        ArgumentProcessor<ExampleNormalBean> p =
-            ArgumentProcessor.newInstance( ExampleNormalBean.class, new GnuParser() );
-        ExampleNormalBean b = new ExampleNormalBean();
+        ArgumentProcessor<Simple> p =
+            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        Simple b = new Simple();
         p.process( new String[] { "-b", "123" }, b );
         assertTrue( b.isBooleanField() );
     }
@@ -108,9 +108,9 @@ public class GnuParserTest
     @Test
     public void testWithMultiValueOption()
     {
-        ArgumentProcessor<ExampleBeanWithMultiValueOption> p =
-            ArgumentProcessor.newInstance( ExampleBeanWithMultiValueOption.class, new GnuParser() );
-        ExampleBeanWithMultiValueOption b = new ExampleBeanWithMultiValueOption();
+        ArgumentProcessor<WithMultiValueOption> p =
+            ArgumentProcessor.newInstance( WithMultiValueOption.class, new GnuParser() );
+        WithMultiValueOption b = new WithMultiValueOption();
         p.process( new String[] { "a", "-o", "b", "-o", "c", "d", "--option", "e" }, b );
         assertEquals( Arrays.asList( "b", "c", "e" ), b.getOptions() );
     }
@@ -121,9 +121,9 @@ public class GnuParserTest
     @Test
     public void testWithNegativeNumbers()
     {
-        ArgumentProcessor<ExampleNormalBean> p =
-            ArgumentProcessor.newInstance( ExampleNormalBean.class, new GnuParser() );
-        ExampleNormalBean b = new ExampleNormalBean();
+        ArgumentProcessor<Simple> p =
+            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        Simple b = new Simple();
         p.process( new String[] { "-1", "--1", "-2", "-3", "-4" }, b );
         assertEquals( "-3", b.getStringFIeld2() );
         assertEquals( Arrays.asList( "-1", "--1", "-4" ), b.getValues() );
@@ -135,8 +135,8 @@ public class GnuParserTest
     @Test
     public void testWithoutCli()
     {
-        ArgumentProcessor<BeanWithoutCli> p = ArgumentProcessor.newInstance( BeanWithoutCli.class, new GnuParser() );
-        BeanWithoutCli b = new BeanWithoutCli();
+        ArgumentProcessor<WithoutCli> p = ArgumentProcessor.newInstance( WithoutCli.class, new GnuParser() );
+        WithoutCli b = new WithoutCli();
         p.process( new String[] { "-a", "aaaaa" }, b );
         assertEquals( "aaaaa", b.optionA );
     }

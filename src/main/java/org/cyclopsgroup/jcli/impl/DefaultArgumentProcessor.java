@@ -25,7 +25,7 @@ class DefaultArgumentProcessor<T>
 
     private final CommandLineParser parser;
 
-    DefaultArgumentProcessor( Class<T> beanType, CommandLineParser parser )
+    DefaultArgumentProcessor( Class<? extends T> beanType, CommandLineParser parser )
     {
         this.parser = parser;
         context = new ParsingContextBuilder<T>( beanType ).build();

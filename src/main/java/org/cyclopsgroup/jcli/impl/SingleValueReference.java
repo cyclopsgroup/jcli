@@ -6,9 +6,9 @@ import org.cyclopsgroup.caff.ref.ValueReference;
 class SingleValueReference<T>
     extends Reference<T>
 {
-    SingleValueReference( Class<T> beanType, Converter<?> converter, ValueReference<T> ref, String longName )
+    SingleValueReference( Class<? extends T> beanType, Converter<?> converter, ValueReference<T> ref, String longName )
     {
-        super( beanType, converter, ref, longName );
+        super( converter, ref, longName );
     }
 
     /**

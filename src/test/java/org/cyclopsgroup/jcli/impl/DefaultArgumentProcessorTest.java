@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.util.ServiceLoader;
 
 import org.cyclopsgroup.jcli.ArgumentProcessor;
-import org.cyclopsgroup.jcli.ExampleNormalBean;
+import org.cyclopsgroup.jcli.Simple;
 import org.cyclopsgroup.jcli.spi.Option;
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class DefaultArgumentProcessorTest
     @Test
     public void testAvailability()
     {
-        ArgumentProcessor<ExampleNormalBean> p = ArgumentProcessor.newInstance( ExampleNormalBean.class, null );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, null );
         assertNotNull( p );
         assertTrue( p.getClass() == DefaultArgumentProcessor.class );
     }
@@ -39,8 +39,8 @@ public class DefaultArgumentProcessorTest
     @Test
     public void testParsingContextWithNormalBean()
     {
-        DefaultArgumentProcessor<ExampleNormalBean> p =
-            new DefaultArgumentProcessor<ExampleNormalBean>( ExampleNormalBean.class, null );
+        DefaultArgumentProcessor<Simple> p =
+            new DefaultArgumentProcessor<Simple>( Simple.class, null );
         Option a = p.getContext().optionWithShortName( "i" );
         assertEquals( "i", a.getName() );
         assertEquals( "tint", a.getLongName() );
@@ -59,7 +59,7 @@ public class DefaultArgumentProcessorTest
     public void testPrintHelp()
         throws IOException
     {
-        ArgumentProcessor<ExampleNormalBean> p = ArgumentProcessor.newInstance( ExampleNormalBean.class, null );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, null );
         p.printHelp( new PrintWriter( new OutputStreamWriter( System.out ), true ) );
     }
 }

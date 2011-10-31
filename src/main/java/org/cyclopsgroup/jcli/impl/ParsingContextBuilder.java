@@ -28,7 +28,7 @@ import org.cyclopsgroup.jcli.annotation.Option;
 class ParsingContextBuilder<T>
 {
     @SuppressWarnings( "unchecked" )
-    private static <T, P> Reference<T> createReference( Class<T> beanType, PropertyDescriptor descriptor,
+    private static <T, P> Reference<T> createReference( Class<? extends T> beanType, PropertyDescriptor descriptor,
                                                         String longName )
     {
         Class<P> valueType = (Class<P>) descriptor.getPropertyType();
@@ -69,9 +69,9 @@ class ParsingContextBuilder<T>
         return a;
     }
 
-    private final Class<T> beanType;
+    private final Class<? extends T> beanType;
 
-    ParsingContextBuilder( Class<T> beanType )
+    ParsingContextBuilder( Class<? extends T> beanType )
     {
         this.beanType = beanType;
     }
@@ -117,7 +117,7 @@ class ParsingContextBuilder<T>
                 continue;
             }
         }
-        return new AnnotationParsingContext<T>( beanType, references, options, new AnnotationCli( cliAnnotation ),
+        return new AnnotationParsingContext<T>( references, options, new AnnotationCli( cliAnnotation ),
                                                 argument == null ? null : new AnnotationArgument( argument ) );
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cyclopsgroup.caff.token.QuotedValueTokenizer;
-import org.cyclopsgroup.jcli.ExampleNormalBean;
+import org.cyclopsgroup.jcli.Simple;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class CliCompletorTest
     public void setUp()
         throws IntrospectionException
     {
-        cc = new CliCompletor( new ExampleNormalBean(), new QuotedValueTokenizer() );
+        cc = new CliCompletor( new Simple(), new QuotedValueTokenizer() );
         candidates = new ArrayList<String>();
     }
 

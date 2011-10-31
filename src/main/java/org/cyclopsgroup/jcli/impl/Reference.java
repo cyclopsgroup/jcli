@@ -18,7 +18,7 @@ abstract class Reference<T>
 
     final ValueReference<T> ref;
 
-    Reference( Class<T> beanType, Converter<?> converter, ValueReference<T> ref, String longName )
+    Reference( Converter<?> converter, ValueReference<T> ref, String longName )
     {
         this.converter = converter;
         this.ref = ref;

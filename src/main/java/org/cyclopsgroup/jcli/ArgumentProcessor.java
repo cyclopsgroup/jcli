@@ -23,7 +23,7 @@ public abstract class ArgumentProcessor<T>
      * @param beanType Type of the bean
      * @return Instance of an implementation of argument processor
      */
-    public static <T> ArgumentProcessor<T> newInstance( Class<T> beanType )
+    public static <T> ArgumentProcessor<T> newInstance( Class<? extends T> beanType )
     {
         return newInstance( beanType, new GnuParser() );
     }
@@ -36,7 +36,7 @@ public abstract class ArgumentProcessor<T>
      * @param parser Command line parser that is aware of command line syntax
      * @return Instance of an implementation of argument processor
      */
-    public static <T> ArgumentProcessor<T> newInstance( Class<T> beanType, CommandLineParser parser )
+    public static <T> ArgumentProcessor<T> newInstance( Class<? extends T> beanType, CommandLineParser parser )
     {
         return ArgumentProcessorFactory.getInstance().newProcessor( beanType, parser );
     }

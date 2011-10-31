@@ -13,7 +13,7 @@ import org.cyclopsgroup.jcli.annotation.Option;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Cli( name = "sample" )
-public class ExampleBeanWithMultiValueOption
+public class WithMultiValueOption
 {
     private List<String> options;
 

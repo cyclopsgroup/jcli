@@ -5,7 +5,7 @@ import org.cyclopsgroup.jcli.annotation.Option;
 /**
  * A bean with out cli annotation
  */
-public class BeanWithoutCli
+public class WithoutCli
 {
     String optionA;
 

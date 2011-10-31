@@ -27,8 +27,8 @@ class AnnotationParsingContext<T>
      * @param cli Command line model
      * @param argument Argument definition
      */
-    AnnotationParsingContext( Class<T> beanType, Map<String, Reference<T>> referenceMap,
-                              List<AnnotationOption> options, AnnotationCli cli, AnnotationArgument argument )
+    AnnotationParsingContext( Map<String, Reference<T>> referenceMap, List<AnnotationOption> options,
+                              AnnotationCli cli, AnnotationArgument argument )
     {
         this.options = options;
         this.referenceMap = referenceMap;

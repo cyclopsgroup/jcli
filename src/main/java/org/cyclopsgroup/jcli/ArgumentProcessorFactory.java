@@ -35,5 +35,5 @@ public abstract class ArgumentProcessorFactory
      * @param parser Command line parser that is aware of command line syntax
      * @return Instance of argument processor implementation
      */
-    protected abstract <T> ArgumentProcessor<T> newProcessor( Class<T> beanType, CommandLineParser parser );
+    protected abstract <T> ArgumentProcessor<T> newProcessor( Class<? extends T> beanType, CommandLineParser parser );
 }

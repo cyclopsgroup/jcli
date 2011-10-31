@@ -17,7 +17,7 @@ public class DefaultArgumentProcessorFactory
      * @inheritDoc
      */
     @Override
-    protected <T> ArgumentProcessor<T> newProcessor( Class<T> beanType, CommandLineParser parser )
+    protected <T> ArgumentProcessor<T> newProcessor( Class<? extends T> beanType, CommandLineParser parser )
     {
         try
         {

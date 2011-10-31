@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.beans.IntrospectionException;
 
 import org.cyclopsgroup.jcli.ArgumentProcessor;
-import org.cyclopsgroup.jcli.ExampleNormalBean;
+import org.cyclopsgroup.jcli.Simple;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class ArgumentsInspectorTest
     public void setUp()
         throws IntrospectionException
     {
-        ins = new ArgumentsInspector( ArgumentProcessor.newInstance( ExampleNormalBean.class ).createParsingContext() );
+        ins = new ArgumentsInspector( ArgumentProcessor.newInstance( Simple.class ).createParsingContext() );
     }
 
     /**

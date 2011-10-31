@@ -11,10 +11,10 @@ class MultiValueReference<T>
 {
     private final Class<?> listType;
 
-    MultiValueReference( Class<T> beanType, Converter<?> converter, ValueReference<T> ref, String longName,
+    MultiValueReference( Class<? extends T> beanType, Converter<?> converter, ValueReference<T> ref, String longName,
                          Class<?> listType )
     {
-        super( beanType, converter, ref, longName );
+        super( converter, ref, longName );
         this.listType = listType;
     }
 

@@ -9,7 +9,7 @@ import org.cyclopsgroup.jcli.annotation.Cli;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Cli( name = "sample2" )
-public class ExampleBeanWithSimpleArgument
+public class WithSimpleArgument
 {
     private String arg;
 
