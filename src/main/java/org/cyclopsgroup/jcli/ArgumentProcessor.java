@@ -71,4 +71,12 @@ public abstract class ArgumentProcessor<T>
     {
         process( Arrays.asList( arguments ), bean );
     }
+
+    /**
+     * Verify if given arguments meet requirement defined for processor
+     *
+     * @param arguments Array of command line arguments
+     * @return
+     */
+    public abstract ValidationResult validate( String[] arguments );
 }
