@@ -27,24 +27,24 @@ import org.cyclopsgroup.jcli.annotation.Option;
  */
 class ParsingContextBuilder<T>
 {
-    @SuppressWarnings( { "unchecked", "rawtypes" } )
-    private static <T> Reference<T> createReference( Class<? extends T> beanType, PropertyDescriptor descriptor,
-                                                     String longName )
+    @SuppressWarnings( "unchecked" )
+    private static <B, P> Reference<B> createReference( Class<? extends B> beanType, PropertyDescriptor descriptor,
+                                                        String longName )
     {
-        Class<?> valueType = descriptor.getPropertyType();
+        Class<P> valueType = (Class<P>) descriptor.getPropertyType();
         MultiValue multiValue = getAnnotation( descriptor, MultiValue.class );
         if ( multiValue != null )
         {
-            valueType = multiValue.valueType();
+            valueType = (Class<P>) multiValue.valueType();
         }
 
-        Converter converter = new AnnotatedConverter( valueType, descriptor );
-        ValueReference<T> reference = ValueReference.instanceOf( descriptor );
+        Converter<P> converter = new AnnotatedConverter<P>( valueType, descriptor );
+        ValueReference<B> reference = ValueReference.instanceOf( descriptor );
         if ( multiValue != null )
         {
-            return new MultiValueReference<T>( beanType, converter, reference, longName, multiValue.listType() );
+            return new MultiValueReference<B>( beanType, converter, reference, longName, multiValue.listType() );
         }
-        return new SingleValueReference<T>( beanType, converter, reference, longName );
+        return new SingleValueReference<B>( beanType, converter, reference, longName );
     }
 
     /**
