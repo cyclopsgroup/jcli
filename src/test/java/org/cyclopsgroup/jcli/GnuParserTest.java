@@ -23,8 +23,7 @@ public class GnuParserTest
     @Test
     public void testCombination()
     {
-        ArgumentProcessor<Simple> p =
-            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
         Simple b = new Simple();
         p.process( new String[] { "-i", "123", "a", "-f", "abc", "b" }, b );
 
@@ -52,8 +51,7 @@ public class GnuParserTest
     @Test
     public void testNormalBeanWithoutValues()
     {
-        ArgumentProcessor<Simple> p =
-            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
         Simple b = new Simple();
         p.process( new String[] { "-i", "123", "--field1", "abc" }, b );
 
@@ -89,14 +87,22 @@ public class GnuParserTest
         assertNull( b.getArg() );
     }
 
+    @Test
+    public void testWithDash()
+    {
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class );
+        Simple s = new Simple();
+        p.process( new String[] { "-f", "-1" }, s );
+        assertEquals( "-1", s.getStringField1() );
+    }
+
     /**
      * Verify boolean is handled correctly
      */
     @Test
     public void testWithFlag()
     {
-        ArgumentProcessor<Simple> p =
-            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
         Simple b = new Simple();
         p.process( new String[] { "-b", "123" }, b );
         assertTrue( b.isBooleanField() );
@@ -121,8 +127,7 @@ public class GnuParserTest
     @Test
     public void testWithNegativeNumbers()
     {
-        ArgumentProcessor<Simple> p =
-            ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
         Simple b = new Simple();
         p.process( new String[] { "-1", "--1", "-2", "-3", "-4" }, b );
         assertEquals( "-3", b.getStringFIeld2() );
