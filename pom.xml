@@ -68,7 +68,7 @@
         <site>
             <id>cyclopsgroup.server</id>
             <url>
-                s3://www2.cyclopsgroup.org/projects/jcli
+                s3://${dist.bucketName}/projects/jcli
             </url>
         </site>
     </distributionManagement>
