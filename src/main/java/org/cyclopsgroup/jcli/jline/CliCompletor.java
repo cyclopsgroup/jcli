@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jline.Completor;
+import jline.console.completer.Completer;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -25,7 +25,7 @@ import org.cyclopsgroup.jcli.spi.ParsingContext;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class CliCompletor
-    implements Completor
+    implements Completer
 {
     private static List<String> filterList( List<String> list, String prefix )
     {
@@ -59,7 +59,8 @@ public class CliCompletor
     {
         Validate.notNull( cliBean, "Cli bean can't be NULL" );
         Validate.notNull( tokenizer, "String tokenizer can't be NULL" );
-        context = ArgumentProcessor.newInstance( cliBean.getClass() ).createParsingContext();
+        context =
+            ArgumentProcessor.newInstance( cliBean.getClass() ).createParsingContext();
         if ( cliBean instanceof AutoCompletable )
         {
             this.completable = (AutoCompletable) cliBean;
@@ -73,7 +74,8 @@ public class CliCompletor
                     return Collections.emptyList();
                 }
 
-                public List<String> suggestOption( String optionName, String partialOption )
+                public List<String> suggestOption( String optionName,
+                                                   String partialOption )
                 {
                     return Collections.emptyList();
                 }
@@ -86,7 +88,8 @@ public class CliCompletor
      * @inheritDoc
      */
     @SuppressWarnings( { "unchecked", "rawtypes" } )
-    public int complete( final String command, final int cursor, final List suggestions )
+    public int complete( final String command, final int cursor,
+                         final List suggestions )
     {
         ArgumentsInspector inspector = new ArgumentsInspector( context );
         final AtomicBoolean terminated = new AtomicBoolean( true );
@@ -113,7 +116,8 @@ public class CliCompletor
                 inspector.end();
             }
         }
-        // System.err.println( "command=[" + command + "], cursor=" + cursor + ", state=" + inspector.getState().name()
+        // System.err.println( "command=[" + command + "], cursor=" + cursor +
+        // ", state=" + inspector.getState().name()
         // + ", value=" + inspector.getCurrentValue() );
         List<String> candidates = new ArrayList<String>();
         switch ( inspector.getState() )
@@ -128,10 +132,12 @@ public class CliCompletor
                 break;
             case OPTION:
             case LONG_OPTION:
-                candidates.addAll( suggestOptionNames( inspector, inspector.getCurrentValue() ) );
+                candidates.addAll( suggestOptionNames( inspector,
+                                                       inspector.getCurrentValue() ) );
                 break;
             case OPTION_VALUE:
-                candidates.addAll( suggestOptionValue( inspector.getCurrentOption(), inspector.getCurrentValue() ) );
+                candidates.addAll( suggestOptionValue( inspector.getCurrentOption(),
+                                                       inspector.getCurrentValue() ) );
                 break;
             case ARGUMENT:
                 candidates.addAll( suggestArguments( inspector.getCurrentValue() ) );
@@ -163,7 +169,9 @@ public class CliCompletor
             results = completable.suggestArgument( partialArgument );
             if ( results == null )
             {
-                results = filterList( completable.suggestArgument( null ), partialArgument );
+                results =
+                    filterList( completable.suggestArgument( null ),
+                                partialArgument );
             }
         }
         if ( results == null )
@@ -178,16 +186,19 @@ public class CliCompletor
         return results;
     }
 
-    private List<String> suggestOptionNames( ArgumentsInspector inspector, String value )
+    private List<String> suggestOptionNames( ArgumentsInspector inspector,
+                                             String value )
     {
         List<String> results = new ArrayList<String>();
         for ( Option o : inspector.getRemainingOptions() )
         {
-            if ( value.startsWith( "--" ) && o.getLongName() != null && ( "--" + o.getLongName() ).startsWith( value ) )
+            if ( value.startsWith( "--" ) && o.getLongName() != null
+                && ( "--" + o.getLongName() ).startsWith( value ) )
             {
                 results.add( "--" + o.getLongName() );
             }
-            else if ( value.startsWith( "-" ) && ( "-" + o.getName() ).startsWith( value ) )
+            else if ( value.startsWith( "-" )
+                && ( "-" + o.getName() ).startsWith( value ) )
             {
                 results.add( "-" + o.getName() );
             }
@@ -205,10 +216,13 @@ public class CliCompletor
         }
         else
         {
-            results = completable.suggestOption( option.getName(), partialValue );
+            results =
+                completable.suggestOption( option.getName(), partialValue );
             if ( results == null )
             {
-                results = filterList( completable.suggestOption( option.getName(), null ), partialValue );
+                results =
+                    filterList( completable.suggestOption( option.getName(),
+                                                           null ), partialValue );
             }
         }
         if ( results == null )
