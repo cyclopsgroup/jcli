@@ -10,7 +10,7 @@ import org.cyclopsgroup.jcli.spi.Option;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-@FixLengthType( length = 256 )
+@FixLengthType( length = 485 )
 public class OptionHelp
 {
     private final Option option;
@@ -23,13 +23,17 @@ public class OptionHelp
     /**
      * @return Description of option
      */
-    @FixLengthField( start = 26, length = 228 )
+    @FixLengthField( start = 26, length = 256 )
     public String getDescription()
     {
         String desc = option.getDescription();
         if ( !option.isFlag() && StringUtils.isNotBlank( option.getDefaultValue() ) )
         {
             desc += "(Default value is " + option.getDefaultValue() + ")";
+        }
+        if(option.getConflicts().length > 0)
+        {
+        	desc += ", conflicts [\"" + StringUtils.join(option.getConflicts(), "\",\"" ) + "\"]";
         }
         return desc;
     }
