@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import jline.console.completer.Completer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.cyclopsgroup.caff.token.TokenEvent;
 import org.cyclopsgroup.caff.token.TokenEventHandler;
 import org.cyclopsgroup.caff.token.ValueTokenizer;
