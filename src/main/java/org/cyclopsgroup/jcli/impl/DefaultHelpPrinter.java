@@ -3,7 +3,7 @@ package org.cyclopsgroup.jcli.impl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cyclopsgroup.caff.format.Format;
 import org.cyclopsgroup.caff.format.Formats;
 import org.cyclopsgroup.jcli.spi.Option;
