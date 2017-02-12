@@ -12,7 +12,8 @@ import org.cyclopsgroup.jcli.spi.ParsingContext;
  * The facade class that parses arguments and sets values to given bean
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
- * @param <T> Type of bean it processes.
+ * @param <T>
+ *            Type of bean it processes.
  */
 public abstract class ArgumentProcessor<T> {
 	/**
@@ -24,9 +25,13 @@ public abstract class ArgumentProcessor<T> {
 	 *            Type of the bean
 	 * @return Instance of an implementation of argument processor
 	 */
-	public static <T> ArgumentProcessor<T> newInstance(
-			Class<? extends T> beanType) {
+	public static <T> ArgumentProcessor<T> forType(Class<T> beanType) {
 		return newInstance(beanType, new GnuParser());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> ArgumentProcessor<T> forTypeOf(T bean) {
+		return forType((Class<T>) bean.getClass());
 	}
 
 	/**
@@ -46,10 +51,12 @@ public abstract class ArgumentProcessor<T> {
 		return ArgumentProcessorFactory.getInstance().newProcessor(beanType,
 				parser);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T> ArgumentProcessor<T> newInstance(T bean) {
-		return newInstance((T)bean.getClass());
+
+	/**
+	 * @deprecated Use {@link #forType(Class)} instead.
+	 */
+	public static <T> ArgumentProcessor<T> newInstance(Class<T> beanType) {
+		return forType(beanType);
 	}
 
 	/**
