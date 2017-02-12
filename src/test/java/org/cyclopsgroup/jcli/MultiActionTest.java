@@ -11,24 +11,20 @@ import org.junit.Test;
 /**
  * A test to go over multi action use case
  */
-public class MultiActionTest
-{
-    /**
-     * Happy case of multi actions
-     *
-     * @throws Exception Allows any exception
-     */
-    @Test
-    public void testMultiAction()
-        throws Exception
-    {
-        Map<String, Class<? extends Object>> clis = new HashMap<String, Class<?>>();
-        clis.put( "nocli", WithoutCli.class );
-        clis.put( "simple", WithSimpleArgument.class );
+public class MultiActionTest {
+	/**
+	 * Happy case of multi actions.
+	 */
+	@Test
+	public void testMultiAction() throws InstantiationException, IllegalAccessException {
+		Map<String, Class<?>> clis = new HashMap<String, Class<?>>();
+		clis.put("nocli", WithoutCli.class);
+		clis.put("simple", WithSimpleArgument.class);
 
-        Class<? extends Object> type = clis.get( "nocli" );
-        WithoutCli nocli = (WithoutCli) type.newInstance();
-        ArgumentProcessor.newInstance( type ).process( Arrays.<String> asList( "-a", "aaaaa" ), nocli );
-        assertEquals( "aaaaa", nocli.optionA );
-    }
+		Class<?> type = clis.get("nocli");
+		WithoutCli nocli = (WithoutCli) type.newInstance();
+		ArgumentProcessor.newInstance(nocli)
+				.process(Arrays.asList("-a", "aaaaa"), nocli);
+		assertEquals("aaaaa", nocli.optionA);
+	}
 }
