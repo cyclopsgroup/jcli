@@ -17,6 +17,32 @@ import org.junit.Test;
  */
 public class GnuParserTest
 {
+	
+	/**
+     * Verify use cases with all possible types of arguments
+     */
+    @Test
+    public void testConflict()
+    {
+        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        Simple b = new Simple();
+        boolean thrown = false;
+        try{
+        	p.process( new String[] { "-c", "123", "a", "-f", "abc"}, b );
+        }catch(AssertionError e){
+        	thrown = true;
+        }
+        assertTrue("Conflict not detected", thrown);
+        thrown = false;
+        p = ArgumentProcessor.newInstance( Simple.class, new GnuParser() );
+        try{
+        	p.process( new String[] { "-c", "123", "a", "--field1", "abc"}, b );
+        }catch(AssertionError e){
+        	thrown = true;
+        }
+        assertTrue("Conflict not detected with long name", thrown);
+    }
+	
     /**
      * Verify use cases with all possible types of arguments
      */

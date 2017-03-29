@@ -1,12 +1,14 @@
 package org.cyclopsgroup.jcli.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
+import org.cyclopsgroup.jcli.spi.Option;
 
 class DefaultBeanProcessor
 {
@@ -49,6 +51,24 @@ class DefaultBeanProcessor
             MultiValueReference<T> ref = (MultiValueReference<T>) context.lookupReference( entry.getKey(), false );
             ref.setValues( bean, entry.getValue() );
         }
+        //END of data load into bean
+        for(CommandLine.OptionValue ov : cli.getOptionValues())
+        {
+        	Option cmOption;
+        	for(Option contextOption: context.options())
+        	{
+	        	Reference<T> ref = context.lookupReference( contextOption.getName(), false );
+	        	if(ref instanceof SingleValueReference<?> && ( (SingleValueReference<T>) ref ).getValue( bean ) == null)
+	        	{
+	        		continue;
+	        	}
+	        	
+	    		if((cmOption = context.optionWithShortName(ov.name)) != null &&
+	    				Arrays.asList(cmOption.getConflicts()).contains(contextOption.getName()))
+	    			throw new AssertionError("grande errore cmOption: " + cmOption.getName() + " : " + contextOption.getName());
+        	}
+        }
+        //
         Reference<T> ref = context.lookupReference( DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME, false );
         if ( ref == null )
         {

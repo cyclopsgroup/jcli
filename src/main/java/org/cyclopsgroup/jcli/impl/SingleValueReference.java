@@ -21,4 +21,9 @@ class SingleValueReference<T>
     {
         ref.writeValue( converter.fromCharacters( value ), bean );
     }
+    
+    public Object getValue( T bean)
+    {
+        return ref.isReadable() ? ref.readValue( bean ) : null;
+    }
 }

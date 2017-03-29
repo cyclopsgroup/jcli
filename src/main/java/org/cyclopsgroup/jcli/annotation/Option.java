@@ -45,4 +45,9 @@ public @interface Option
      * @return True if option has to be specified explicitly
      */
     boolean required() default false;
+    
+    /**
+     * @return Array of conflicting options
+     */
+    String[] conflicts() default { };
 }

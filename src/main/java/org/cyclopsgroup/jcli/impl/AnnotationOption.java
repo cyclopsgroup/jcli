@@ -13,7 +13,7 @@ class AnnotationOption
 
     private final Option option;
 
-    AnnotationOption( Option option, boolean flag, boolean multiValue )
+    AnnotationOption( Option option, boolean flag, boolean multiValue)
     {
         this.option = option;
         this.flag = flag;
@@ -108,6 +108,14 @@ class AnnotationOption
     public boolean isRequired()
     {
         return option.required();
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String[] getConflicts(){
+    	return option.conflicts();
     }
 
 }

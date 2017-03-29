@@ -46,4 +46,9 @@ public interface Option
      * @return True if option is required
      */
     boolean isRequired();
+    
+    /**
+     * @return Array of conflicting options
+     */
+    String[] getConflicts();
 }

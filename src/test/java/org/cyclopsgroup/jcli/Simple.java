@@ -66,7 +66,17 @@ public class Simple
     private String stringFIeld2;
 
     private List<String> values;
+    
+    private String conflictFieldValue;
 
+    /**
+     * @return An integer option
+     */
+    public final String getFieldWithConflict()
+    {
+        return conflictFieldValue;
+    }
+    
     /**
      * @return An integer option
      */
@@ -105,6 +115,15 @@ public class Simple
     public final boolean isBooleanField()
     {
         return booleanField;
+    }
+    
+    /**
+     * @param conflict test
+     */
+    @Option( name = "c", longName = "conflict", description = "Test conflicts", conflicts = {"f"})
+    public final void setFieldWithConflict( String conflictFieldValue )
+    {
+        this.conflictFieldValue = conflictFieldValue;
     }
 
     /**
