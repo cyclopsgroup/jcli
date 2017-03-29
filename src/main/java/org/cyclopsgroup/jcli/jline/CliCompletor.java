@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import jline.console.completer.Completer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.cyclopsgroup.caff.token.TokenEvent;
 import org.cyclopsgroup.caff.token.TokenEventHandler;
 import org.cyclopsgroup.caff.token.ValueTokenizer;
@@ -25,7 +25,7 @@ import org.cyclopsgroup.jcli.spi.ParsingContext;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 public class CliCompletor
-    implements Completer
+        implements Completer
 {
     private static List<String> filterList( List<String> list, String prefix )
     {
@@ -60,7 +60,7 @@ public class CliCompletor
         Validate.notNull( cliBean, "Cli bean can't be NULL" );
         Validate.notNull( tokenizer, "String tokenizer can't be NULL" );
         context =
-            ArgumentProcessor.newInstance( cliBean.getClass() ).createParsingContext();
+                ArgumentProcessor.newInstance( cliBean.getClass() ).createParsingContext();
         if ( cliBean instanceof AutoCompletable )
         {
             this.completable = (AutoCompletable) cliBean;
@@ -133,11 +133,11 @@ public class CliCompletor
             case OPTION:
             case LONG_OPTION:
                 candidates.addAll( suggestOptionNames( inspector,
-                                                       inspector.getCurrentValue() ) );
+                        inspector.getCurrentValue() ) );
                 break;
             case OPTION_VALUE:
                 candidates.addAll( suggestOptionValue( inspector.getCurrentOption(),
-                                                       inspector.getCurrentValue() ) );
+                        inspector.getCurrentValue() ) );
                 break;
             case ARGUMENT:
                 candidates.addAll( suggestArguments( inspector.getCurrentValue() ) );
@@ -170,7 +170,7 @@ public class CliCompletor
             if ( results == null )
             {
                 results =
-                    filterList( completable.suggestArgument( null ),
+                        filterList( completable.suggestArgument( null ),
                                 partialArgument );
             }
         }
@@ -193,12 +193,12 @@ public class CliCompletor
         for ( Option o : inspector.getRemainingOptions() )
         {
             if ( value.startsWith( "--" ) && o.getLongName() != null
-                && ( "--" + o.getLongName() ).startsWith( value ) )
+                    && ( "--" + o.getLongName() ).startsWith( value ) )
             {
                 results.add( "--" + o.getLongName() );
             }
             else if ( value.startsWith( "-" )
-                && ( "-" + o.getName() ).startsWith( value ) )
+                    && ( "-" + o.getName() ).startsWith( value ) )
             {
                 results.add( "-" + o.getName() );
             }
@@ -217,12 +217,12 @@ public class CliCompletor
         else
         {
             results =
-                completable.suggestOption( option.getName(), partialValue );
+                    completable.suggestOption( option.getName(), partialValue );
             if ( results == null )
             {
                 results =
-                    filterList( completable.suggestOption( option.getName(),
-                                                           null ), partialValue );
+                        filterList( completable.suggestOption( option.getName(),
+                                null ), partialValue );
             }
         }
         if ( results == null )

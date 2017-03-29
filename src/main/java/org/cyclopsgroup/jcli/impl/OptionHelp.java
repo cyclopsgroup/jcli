@@ -1,6 +1,6 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cyclopsgroup.caff.format.FixLengthField;
 import org.cyclopsgroup.caff.format.FixLengthType;
 import org.cyclopsgroup.jcli.spi.Option;
