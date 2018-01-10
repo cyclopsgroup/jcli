@@ -27,7 +27,7 @@ public class ArgumentsInspectorTest
     public void setUp()
         throws IntrospectionException
     {
-        ins = new ArgumentsInspector( ArgumentProcessor.newInstance( Simple.class ).createParsingContext() );
+        ins = new ArgumentsInspector( ArgumentProcessor.forType( Simple.class ).createParsingContext() );
     }
 
     /**

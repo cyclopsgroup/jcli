@@ -3,7 +3,7 @@ package org.cyclopsgroup.jcli.example;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.cyclopsgroup.caff.conversion.DateField;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.annotation.Argument;
@@ -112,7 +112,7 @@ public class UserControl
     public static void main( String[] args )
     {
         UserControl control = new UserControl();
-        ArgumentProcessor.newInstance( UserControl.class ).process( args, control );
+        ArgumentProcessor.forType( UserControl.class ).process( args, control );
         System.out.println( control );
     }
 }

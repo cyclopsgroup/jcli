@@ -1,16 +1,29 @@
 package org.cyclopsgroup.jcli.jline;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.cyclopsgroup.caff.token.QuotedValueTokenizer;
 import org.cyclopsgroup.jcli.Simple;
+import org.jline.reader.Candidate;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.ParsedLine;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.auto.Mock;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.sound.sampled.Line;
 
 /**
  * Test case for {@link CliCompletor}
@@ -19,9 +32,15 @@ import org.junit.Test;
  */
 public class CliCompletorTest
 {
-    private List<String> candidates;
+    private List<Candidate> candidates;
 
     private CliCompletor cc;
+
+    private Mockery context;
+
+    private LineReader lineReader;
+
+    private ParsedLine parsedLine;
 
     /**
      * Set up completor to test
@@ -33,7 +52,10 @@ public class CliCompletorTest
         throws IntrospectionException
     {
         cc = new CliCompletor( new Simple(), new QuotedValueTokenizer() );
-        candidates = new ArrayList<String>();
+        candidates = new ArrayList<Candidate>();
+        context = new Mockery();
+        lineReader = context.mock(LineReader.class);
+        parsedLine = context.mock(ParsedLine.class);
     }
 
     /**
@@ -43,8 +65,19 @@ public class CliCompletorTest
     public void testCompleteWithEmpty()
         throws IntrospectionException
     {
-        assertEquals( 0, cc.complete( "", 0, candidates ) );
-        assertArrayEquals( new String[] { "-2", "-b", "-f", "-i", "11111", "22222", "33333" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "" ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine, candidates );
+        String[] expecteds = {"-2", "-b", "-f", "-i", "11111", "22222", "33333"};
+        for (int i = 0; i < expecteds.length; i++)
+        {
+            assertThat(candidates.get(i).value(), is(expecteds[i]));
+        }
     }
 
     /**
@@ -53,8 +86,19 @@ public class CliCompletorTest
     @Test
     public void testCompleteWithLongOptionPrefix()
     {
-        assertEquals( 0, cc.complete( "--", 2, candidates ) );
-        assertArrayEquals( new String[] { "--boolean", "--field1", "--field2", "--tint" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "--" ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine,  candidates );
+        String[] expecteds = {"--boolean", "--field1", "--field2", "--tint"};
+        for (int i = 0; i < expecteds.length; i++)
+        {
+            assertThat(candidates.get(i).value(), is(expecteds[i]));
+        }
     }
 
     /**
@@ -63,8 +107,19 @@ public class CliCompletorTest
     @Test
     public void testCompleteWithOption()
     {
-        assertEquals( 3, cc.complete( "-f ", 3, candidates ) );
-        assertArrayEquals( new String[] { "aaaa", "bbbb", "cccc" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "-f " ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine, candidates );
+        String[] expecteds = {"aaaa", "bbbb", "cccc"};
+        for (int i = 0; i < expecteds.length; i++)
+        {
+            assertThat(candidates.get(i).value(), is(expecteds[i]));
+        }
     }
 
     /**
@@ -73,8 +128,19 @@ public class CliCompletorTest
     @Test
     public void testCompleteWithOptionPrefix()
     {
-        assertEquals( 0, cc.complete( "-", 1, candidates ) );
-        assertArrayEquals( new String[] { "-2", "-b", "-f", "-i" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "-" ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine, candidates );
+        String[] expecteds = {"-2", "-b", "-f", "-i"};
+        for (int i = 0; i < expecteds.length; i++)
+        {
+            assertThat(candidates.get(i).value(), is(expecteds[i]));
+        }
     }
 
     /**
@@ -83,8 +149,19 @@ public class CliCompletorTest
     @Test
     public void testCompleteWithPartialLongOption()
     {
-        assertEquals( 0, cc.complete( "--f", 3, candidates ) );
-        assertArrayEquals( new String[] { "--field1", "--field2" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "--f" ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine, candidates );
+        String[] expecteds = {"--field1", "--field2"};
+        for (int i = 0; i < expecteds.length; i++)
+        {
+            assertThat(candidates.get(i).value(), is(expecteds[i]));
+        }
     }
 
     /**
@@ -93,7 +170,14 @@ public class CliCompletorTest
     @Test
     public void testCompleteWithSecondOption()
     {
-        assertEquals( 8, cc.complete( "-i 1 -f aa", 11, candidates ) );
-        assertArrayEquals( new String[] { "aaaa" }, candidates.toArray() );
+        context.checking( new Expectations()
+        {
+            {
+                oneOf( parsedLine ).line();
+                will( returnValue( "-i 1 -f aa" ) );
+            }
+        } );
+        cc.complete( lineReader, parsedLine, candidates );
+        assertThat(candidates.get(0).value(), is("aaaa"));
     }
 }

@@ -90,7 +90,7 @@ public class GnuParserTest
     @Test
     public void testWithDash()
     {
-        ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance( Simple.class );
+        ArgumentProcessor<Simple> p = ArgumentProcessor.forType( Simple.class );
         Simple s = new Simple();
         p.process( new String[] { "-f", "-1" }, s );
         assertEquals( "-1", s.getStringField1() );
