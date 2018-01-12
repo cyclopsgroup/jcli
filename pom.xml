@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.cyclopsgroup</groupId>
         <artifactId>cyclopsgroup-java-parent</artifactId>
-        <version>0.6</version>
+        <version>0.7.0</version>
     </parent>
     <artifactId>jcli</artifactId>
     <name>jcli</name>
