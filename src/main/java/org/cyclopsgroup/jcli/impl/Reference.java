@@ -1,6 +1,6 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
 
