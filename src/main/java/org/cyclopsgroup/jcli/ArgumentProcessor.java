@@ -22,7 +22,7 @@ public abstract class ArgumentProcessor<T> {
    * @param beanType Type of the bean
    * @return Instance of an implementation of argument processor
    */
-  public static <T> ArgumentProcessor<T> forType(Class<T> beanType) {
+  public static <T> ArgumentProcessor<T> forType(Class<? extends T> beanType) {
     return newInstance(beanType, new GnuParser());
   }
 
