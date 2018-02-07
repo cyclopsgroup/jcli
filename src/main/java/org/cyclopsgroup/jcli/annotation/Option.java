@@ -12,37 +12,36 @@ import java.lang.annotation.Target;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
-@Target( { ElementType.METHOD, ElementType.FIELD } )
-@Retention( RetentionPolicy.RUNTIME )
-public @interface Option
-{
-    /**
-     * @return Default value of option
-     */
-    String defaultValue() default "";
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Option {
+  /**
+   * @return Default value of option
+   */
+  String defaultValue() default "";
 
-    /**
-     * @return String description of option which is displayed in usage
-     */
-    String description() default "";
+  /**
+   * @return String description of option which is displayed in usage
+   */
+  String description() default "";
 
-    /**
-     * @return Display name of option
-     */
-    String displayName() default "value";
+  /**
+   * @return Display name of option
+   */
+  String displayName() default "value";
 
-    /**
-     * @return Long option name specified with double dash
-     */
-    String longName() default "";
+  /**
+   * @return Long option name specified with double dash
+   */
+  String longName() default "";
 
-    /**
-     * @return Short option name specified with single dash
-     */
-    String name();
+  /**
+   * @return Short option name specified with single dash
+   */
+  String name();
 
-    /**
-     * @return True if option has to be specified explicitly
-     */
-    boolean required() default false;
+  /**
+   * @return True if option has to be specified explicitly
+   */
+  boolean required() default false;
 }

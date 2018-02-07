@@ -12,27 +12,26 @@ import java.lang.annotation.Target;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
-@Target( ElementType.TYPE )
-@Retention( RetentionPolicy.RUNTIME )
-public @interface Cli
-{
-    /**
-     * @return String description of command
-     */
-    String description() default "";
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Cli {
+  /**
+   * @return String description of command
+   */
+  String description() default "";
 
-    /**
-     * @return Name of command
-     */
-    String name();
+  /**
+   * @return Name of command
+   */
+  String name();
 
-    /**
-     * @return Note displayed as footer
-     */
-    String note() default "";
+  /**
+   * @return Note displayed as footer
+   */
+  String note() default "";
 
-    /**
-     * @return True if unexpected option or argument is expected to cause error
-     */
-    boolean restrict() default true;
+  /**
+   * @return True if unexpected option or argument is expected to cause error
+   */
+  boolean restrict() default true;
 }

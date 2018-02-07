@@ -13,18 +13,17 @@ import org.junit.Test;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public class UserControlTest
-{
-    /**
-     * Verify user control parsing is correct
-     */
-    @Test
-    public void testWithSingleUser()
-    {
-        ArgumentProcessor<UserControl> p = ArgumentProcessor.newInstance( UserControl.class, new GnuParser() );
-        UserControl c = new UserControl();
-        p.process( Arrays.asList( "-a", "ADD", "john" ), c );
-        assertEquals( UserControlAction.ADD, c.getAction() );
-        assertEquals( Arrays.asList( "john" ), c.getUserNames() );
-    }
+public class UserControlTest {
+  /**
+   * Verify user control parsing is correct
+   */
+  @Test
+  public void testWithSingleUser() {
+    ArgumentProcessor<UserControl> p =
+        ArgumentProcessor.newInstance(UserControl.class, new GnuParser());
+    UserControl c = new UserControl();
+    p.process(Arrays.asList("-a", "ADD", "john"), c);
+    assertEquals(UserControlAction.ADD, c.getAction());
+    assertEquals(Arrays.asList("john"), c.getUserNames());
+  }
 }

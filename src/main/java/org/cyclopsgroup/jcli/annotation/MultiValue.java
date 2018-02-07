@@ -13,27 +13,26 @@ import java.util.ArrayList;
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
 @Documented
-@Target( { ElementType.METHOD, ElementType.FIELD } )
-@Retention( RetentionPolicy.RUNTIME )
-public @interface MultiValue
-{
-    /**
-     * @return Type of list that contains values
-     */
-    Class<?> listType() default ArrayList.class;
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MultiValue {
+  /**
+   * @return Type of list that contains values
+   */
+  Class<?> listType() default ArrayList.class;
 
-    /**
-     * @return Max number of values in list. By default it's -1 that means unlimited
-     */
-    int maxValues() default -1;
+  /**
+   * @return Max number of values in list. By default it's -1 that means unlimited
+   */
+  int maxValues() default -1;
 
-    /**
-     * @return Minimal number of values in list. By default it's 0
-     */
-    int minValues() default 0;
+  /**
+   * @return Minimal number of values in list. By default it's 0
+   */
+  int minValues() default 0;
 
-    /**
-     * @return Type of value in list
-     */
-    Class<?> valueType() default String.class;
+  /**
+   * @return Type of value in list
+   */
+  Class<?> valueType() default String.class;
 }

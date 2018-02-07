@@ -12,26 +12,23 @@ import org.cyclopsgroup.jcli.annotation.Option;
  *
  * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
  */
-@Cli( name = "sample" )
-public class WithMultiValueOption
-{
-    private List<String> options;
+@Cli(name = "sample")
+public class WithMultiValueOption {
+  private List<String> options;
 
-    /**
-     * @return List value of option
-     */
-    public final List<String> getOptions()
-    {
-        return options;
-    }
+  /**
+   * @return List value of option
+   */
+  public final List<String> getOptions() {
+    return options;
+  }
 
-    /**
-     * @param options Option values
-     */
-    @Option( name = "o", longName = "option", description = "Multi value option" )
-    @MultiValue( listType = ArrayList.class )
-    public final void setOptions( List<String> options )
-    {
-        this.options = options;
-    }
+  /**
+   * @param options Option values
+   */
+  @Option(name = "o", longName = "option", description = "Multi value option")
+  @MultiValue(listType = ArrayList.class)
+  public final void setOptions(List<String> options) {
+    this.options = options;
+  }
 }

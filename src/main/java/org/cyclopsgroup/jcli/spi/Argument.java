@@ -5,15 +5,14 @@ package org.cyclopsgroup.jcli.spi;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public interface Argument
-{
-    /**
-     * @return Description of arguments
-     */
-    String getDescription();
+public interface Argument {
+  /**
+   * @return Description of arguments
+   */
+  String getDescription();
 
-    /**
-     * @return Displayable argument name in help page
-     */
-    String getDisplayName();
+  /**
+   * @return Displayable argument name in help page
+   */
+  String getDisplayName();
 }
