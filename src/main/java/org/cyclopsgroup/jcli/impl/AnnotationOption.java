@@ -4,110 +4,66 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.cyclopsgroup.jcli.annotation.Option;
 
-class AnnotationOption
-    implements org.cyclopsgroup.jcli.spi.Option
-{
-    private final boolean flag;
+class AnnotationOption implements org.cyclopsgroup.jcli.spi.Option {
+  private final boolean flag;
 
-    private final boolean multiValue;
+  private final boolean multiValue;
 
-    private final Option option;
+  private final Option option;
 
-    AnnotationOption( Option option, boolean flag, boolean multiValue )
-    {
-        this.option = option;
-        this.flag = flag;
-        this.multiValue = multiValue;
-    }
+  AnnotationOption(Option option, boolean flag, boolean multiValue) {
+    this.option = option;
+    this.flag = flag;
+    this.multiValue = multiValue;
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public boolean equals( Object obj )
-    {
-        return EqualsBuilder.reflectionEquals( this, obj );
-    }
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(this, obj);
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getDefaultValue()
-    {
-        return option.defaultValue();
-    }
+  @Override
+  public String getDefaultValue() {
+    return option.defaultValue();
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getDescription()
-    {
-        return option.description();
-    }
+  @Override
+  public String getDescription() {
+    return option.description();
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getDisplayName()
-    {
-        return option.displayName();
-    }
+  @Override
+  public String getDisplayName() {
+    return option.displayName();
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getLongName()
-    {
-        return option.longName();
-    }
+  @Override
+  public String getLongName() {
+    return option.longName();
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String getName()
-    {
-        return option.name();
-    }
+  @Override
+  public String getName() {
+    return option.name();
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public int hashCode()
-    {
-        return HashCodeBuilder.reflectionHashCode( this );
-    }
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public boolean isFlag()
-    {
-        return flag;
-    }
+  @Override
+  public boolean isFlag() {
+    return flag;
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public boolean isMultiValue()
-    {
-        return multiValue;
-    }
+  @Override
+  public boolean isMultiValue() {
+    return multiValue;
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public boolean isRequired()
-    {
-        return option.required();
-    }
-
+  @Override
+  public boolean isRequired() {
+    return option.required();
+  }
 }

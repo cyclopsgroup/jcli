@@ -10,82 +10,67 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
-public final class CommandLine
-{
+public final class CommandLine {
+  /**
+   * One entry of option value
+   */
+  public static final class OptionValue {
     /**
-     * One entry of option value
+     * Name of command line option it detects
      */
-    public static final class OptionValue
-    {
-        /**
-         * Name of command line option it detects
-         */
-        public final String name;
-
-        /**
-         * True if option name is a short name
-         */
-        public final boolean shortName;
-
-        /**
-         * Detected value
-         */
-        public final String value;
-
-        OptionValue( String name, String value, boolean shortName )
-        {
-            this.name = name;
-            this.value = value;
-            this.shortName = shortName;
-        }
-
-        /**
-         * @inheritDoc
-         */
-        @Override
-        public String toString()
-        {
-            return ToStringBuilder.reflectionToString( this );
-        }
-
-    }
-
-    private final List<String> arguments = new ArrayList<String>();
-
-    private final List<OptionValue> optionValues = new ArrayList<OptionValue>();
-
-    void addArgument( String argument )
-    {
-        this.arguments.add( argument );
-    }
-
-    void addOptionValue( String name, String value, boolean shortName )
-    {
-        this.optionValues.add( new OptionValue( name, value, shortName ) );
-    }
+    public final String name;
 
     /**
-     * @return List of arguments
+     * True if option name is a short name
      */
-    public List<String> getArguments()
-    {
-        return arguments;
-    }
+    public final boolean shortName;
 
     /**
-     * @return List of option and values
+     * Detected value
      */
-    public final List<OptionValue> getOptionValues()
-    {
-        return optionValues;
+    public final String value;
+
+    OptionValue(String name, String value, boolean shortName) {
+      this.name = name;
+      this.value = value;
+      this.shortName = shortName;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
-    public String toString()
-    {
-        return ToStringBuilder.reflectionToString( this );
+    public String toString() {
+      return ToStringBuilder.reflectionToString(this);
     }
+
+  }
+
+  private final List<String> arguments = new ArrayList<String>();
+
+  private final List<OptionValue> optionValues = new ArrayList<OptionValue>();
+
+  void addArgument(String argument) {
+    this.arguments.add(argument);
+  }
+
+  void addOptionValue(String name, String value, boolean shortName) {
+    this.optionValues.add(new OptionValue(name, value, shortName));
+  }
+
+  /**
+   * @return List of arguments
+   */
+  public List<String> getArguments() {
+    return arguments;
+  }
+
+  /**
+   * @return List of option and values
+   */
+  public final List<OptionValue> getOptionValues() {
+    return optionValues;
+  }
+
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
+  }
 }

@@ -6,7 +6,7 @@ import java.util.ServiceLoader;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
 /**
- * Factory class for {@link ArguemntProcessor}
+ * Factory class for {@link ArgumentProcessor}
  *
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */

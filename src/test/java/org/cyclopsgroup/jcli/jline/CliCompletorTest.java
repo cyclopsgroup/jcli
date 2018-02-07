@@ -1,29 +1,21 @@
 package org.cyclopsgroup.jcli.jline;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import org.cyclopsgroup.caff.token.QuotedValueTokenizer;
 import org.cyclopsgroup.jcli.Simple;
 import org.jline.reader.Candidate;
 import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.ParsedLine;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.jmock.auto.Mock;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.sound.sampled.Line;
 
 /**
  * Test case for {@link CliCompletor}

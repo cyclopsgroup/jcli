@@ -10,27 +10,21 @@ import org.cyclopsgroup.caff.ref.ValueReference;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  * @param <T> Type of bean to operate on
  */
-abstract class Reference<T>
-{
-    final Converter<?> converter;
+abstract class Reference<T> {
+  final Converter<?> converter;
 
-    final String longName;
+  final String longName;
 
-    final ValueReference<T> ref;
+  final ValueReference<T> ref;
 
-    Reference( Converter<?> converter, ValueReference<T> ref, String longName )
-    {
-        this.converter = converter;
-        this.ref = ref;
-        this.longName = longName;
-    }
+  Reference(Converter<?> converter, ValueReference<T> ref, String longName) {
+    this.converter = converter;
+    this.ref = ref;
+    this.longName = longName;
+  }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String toString()
-    {
-        return ToStringBuilder.reflectionToString( this );
-    }
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
+  }
 }
