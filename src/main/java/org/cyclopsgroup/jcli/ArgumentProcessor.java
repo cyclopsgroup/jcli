@@ -2,9 +2,10 @@ package org.cyclopsgroup.jcli;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.AccessControlContext;
+import java.security.AccessController;
 import java.util.Arrays;
 import java.util.List;
-
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
@@ -72,7 +73,11 @@ public abstract class ArgumentProcessor<T> {
    * @param arguments List of arguments
    * @param bean Bean to pass values to
    */
-  public abstract void process(List<String> arguments, T bean);
+  public T process(List<String> arguments, T bean) {
+    return process(arguments, bean, AccessController.getContext());
+  }
+
+  public abstract T process(List<String> arguments, T bean, AccessControlContext context);
 
   /**
    * Process argument array and pass values to given bean
@@ -80,8 +85,8 @@ public abstract class ArgumentProcessor<T> {
    * @param arguments Arary of arguments
    * @param bean Bean to pass values to
    */
-  public void process(String[] arguments, T bean) {
-    process(Arrays.asList(arguments), bean);
+  public T process(String[] arguments, T bean) {
+    return process(Arrays.asList(arguments), bean);
   }
 
   /**

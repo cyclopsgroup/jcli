@@ -5,12 +5,13 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.cyclopsgroup.caff.conversion.AnnotatedConverter;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
@@ -18,6 +19,8 @@ import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Internal builder to create instance of {@link AnnotationParsingContext}
@@ -27,16 +30,14 @@ import org.cyclopsgroup.jcli.annotation.Option;
  */
 class ParsingContextBuilder<T> {
   @SuppressWarnings("unchecked")
-  private static <B, P> Reference<B> createReference(Class<? extends B> beanType,
-      PropertyDescriptor descriptor, String longName) {
-    Class<P> valueType = (Class<P>) descriptor.getPropertyType();
-    MultiValue multiValue = getAnnotation(descriptor, MultiValue.class);
+  private static <B, P> Reference<B> createReference(Class<B> beanType, ValueReference<B> reference,
+      String longName) {
+    Class<P> valueType = (Class<P>) reference.getType();
+    MultiValue multiValue = reference.getAnnotation(MultiValue.class);
     if (multiValue != null) {
       valueType = (Class<P>) multiValue.valueType();
     }
-
-    Converter<P> converter = new AnnotatedConverter<P>(valueType, descriptor);
-    ValueReference<B> reference = ValueReference.instanceOf(descriptor);
+    Converter<P> converter = new AnnotatedConverter<P>(valueType, reference.getAnontatedElements());
     if (multiValue != null) {
       return new MultiValueReference<B>(beanType, converter, reference, longName,
           multiValue.listType());
@@ -52,6 +53,7 @@ class ParsingContextBuilder<T> {
    * @param type Type of annotation
    * @return Annotation or null if it's not found
    */
+  @Nullable
   private static <A extends Annotation> A getAnnotation(PropertyDescriptor descriptor,
       Class<A> type) {
     A a = null;
@@ -64,46 +66,59 @@ class ParsingContextBuilder<T> {
     return a;
   }
 
-  private final Class<? extends T> beanType;
-
-  ParsingContextBuilder(Class<? extends T> beanType) {
-    this.beanType = beanType;
-  }
-
-  AnnotationParsingContext<T> build() {
-    List<AnnotationOption> options = new ArrayList<AnnotationOption>();
-    Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
-    Cli cliAnnotation = beanType.getAnnotation(Cli.class);
+  private static <T> List<ValueReference<T>> referenceOfDescriptors(Class<T> beanType) {
     BeanInfo beanInfo;
     try {
       beanInfo = Introspector.getBeanInfo(beanType);
     } catch (IntrospectionException e) {
       throw new RuntimeException("Bean " + beanType + " is not correctly defined", e);
     }
+    return Arrays.asList(beanInfo.getPropertyDescriptors()).stream()
+        .map(d -> ValueReference.<T>instanceOf(d)).collect(Collectors.toList());
+  }
+
+  private static <T> ImmutableList<ValueReference<T>> referenceOfFields(Class<T> beanType) {
+    return ImmutableList
+        .copyOf(FluentIterable.from(beanType.getFields()).append(beanType.getDeclaredFields())
+            .toList().stream().map(f -> ValueReference.<T>instanceOf(f))
+            .collect(Collectors.toMap(f -> f.getName(), f -> f)).values());
+  }
+
+  private final Class<T> beanType;
+
+  @SuppressWarnings("unchecked")
+  ParsingContextBuilder(Class<? extends T> beanType) {
+    this.beanType = (Class<T>) beanType;
+  }
+
+  AnnotationParsingContext<T> build() {
+    List<AnnotationOption> options = new ArrayList<AnnotationOption>();
+    Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
     Argument argument = null;
-    for (PropertyDescriptor descriptor : beanInfo.getPropertyDescriptors()) {
-      Method writer = descriptor.getWriteMethod();
-      if (writer == null) {
-        continue;
-      }
-      Option option = getAnnotation(descriptor, Option.class);
+    List<ValueReference<T>> writableReferences =
+        FluentIterable.from(referenceOfDescriptors(beanType)).append(referenceOfFields(beanType))
+            .filter(r -> r.isWritable()).toList();
+
+    for (ValueReference<T> ref : writableReferences) {
+      Option option = ref.getAnnotation(Option.class);
       if (option != null) {
-        boolean flag = (descriptor.getPropertyType() == Boolean.TYPE
-            || descriptor.getPropertyType() == Boolean.class);
-        boolean multiValue = getAnnotation(descriptor, MultiValue.class) != null;
+        boolean flag = (ref.getType() == Boolean.TYPE || ref.getType() == Boolean.class);
+        boolean multiValue = ref.getAnnotation(MultiValue.class) != null;
         options.add(new AnnotationOption(option, flag, multiValue));
-        references.put(option.name(), createReference(beanType, descriptor, option.longName()));
+        references.put(option.name(), createReference(beanType, ref, option.longName()));
         continue;
       }
-      Argument arg = getAnnotation(descriptor, Argument.class);
+      Argument arg = ref.getAnnotation(Argument.class);
       if (arg != null) {
         argument = arg;
         references.put(DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME,
-            createReference(beanType, descriptor, DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME));
+            createReference(beanType, ref, DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME));
         continue;
       }
     }
-    return new AnnotationParsingContext<T>(references, options, new AnnotationCli(cliAnnotation),
+
+    return new AnnotationParsingContext<T>(references, options,
+        new AnnotationCli(beanType.getAnnotation(Cli.class)),
         argument == null ? null : new AnnotationArgument(argument));
   }
 }

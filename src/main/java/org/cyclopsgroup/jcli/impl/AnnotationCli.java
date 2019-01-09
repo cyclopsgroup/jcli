@@ -1,5 +1,6 @@
 package org.cyclopsgroup.jcli.impl;
 
+import javax.annotation.Nullable;
 import org.cyclopsgroup.jcli.annotation.Cli;
 
 /**
@@ -8,6 +9,7 @@ import org.cyclopsgroup.jcli.annotation.Cli;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 class AnnotationCli implements org.cyclopsgroup.jcli.spi.Cli {
+  @Nullable
   private final Cli cli;
 
   private final boolean undefined;

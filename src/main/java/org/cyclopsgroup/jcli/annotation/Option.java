@@ -34,7 +34,7 @@ public @interface Option {
    * @return Long option name specified with double dash
    */
   String longName() default "";
-
+  
   /**
    * @return Short option name specified with single dash
    */
