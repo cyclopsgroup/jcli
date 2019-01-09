@@ -2,8 +2,6 @@ package org.cyclopsgroup.jcli.impl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.AccessControlContext;
-import java.security.AccessController;
 import java.util.List;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.ValidationResult;
@@ -23,21 +21,21 @@ class DefaultArgumentProcessor<T> extends ArgumentProcessor<T> {
 
   @Override
   public ParsingContext createParsingContext() {
-    return createParsingContextInternal(AccessController.getContext());
+    return createParsingContextInternal();
   }
 
-  private AnnotationParsingContext<T> createParsingContextInternal(AccessControlContext access) {
+  private AnnotationParsingContext<T> createParsingContextInternal() {
     return new ParsingContextBuilder<T>(beanType).build();
   }
 
   @Override
   public void printHelp(PrintWriter out) throws IOException {
-    DefaultHelpPrinter.printHelp(createParsingContextInternal(AccessController.getContext()), out);
+    DefaultHelpPrinter.printHelp(createParsingContextInternal(), out);
   }
 
   @Override
-  public T process(List<String> arguments, T bean, AccessControlContext context) {
-    DefaultBeanProcessor.process(createParsingContextInternal(context), arguments, bean, parser);
+  public T process(List<String> arguments, T bean) {
+    DefaultBeanProcessor.process(createParsingContextInternal(), arguments, bean, parser);
     return bean;
   }
 
