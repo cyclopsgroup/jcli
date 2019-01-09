@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+import java.util.Properties;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
@@ -82,6 +84,11 @@ public abstract class ArgumentProcessor<T> {
   public T process(String[] arguments, T bean) {
     return process(Arrays.asList(arguments), bean);
   }
+
+  /**
+   * Process a properties of name/value pairs.
+   */
+  public abstract T process(Properties props, T bean);
 
   /**
    * Verifies if given arguments meet requirement defined for processor.

@@ -3,10 +3,13 @@ package org.cyclopsgroup.jcli.impl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.ValidationResult;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
+import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
+import com.google.common.collect.ImmutableMap;
 
 class DefaultArgumentProcessor<T> extends ArgumentProcessor<T> {
   static final String ARGUMENT_REFERNCE_NAME = "----arguments----";
@@ -31,6 +34,21 @@ class DefaultArgumentProcessor<T> extends ArgumentProcessor<T> {
   @Override
   public void printHelp(PrintWriter out) throws IOException {
     DefaultHelpPrinter.printHelp(createParsingContextInternal(), out);
+  }
+
+  @Override
+  public T process(Properties props, T bean) {
+    AnnotationParsingContext<T> context = createParsingContextInternal();
+    ImmutableMap.Builder<String, Option> optionByName = ImmutableMap.builder();
+    for (Option option : context.options()) {
+      if (!option.getName().isEmpty()) {
+        optionByName.put(option.getName(), option);
+      }
+      if (!option.getLongName().isEmpty()) {
+        optionByName.put(option.getLongName(), option);
+      }
+    }
+    return null;
   }
 
   @Override
