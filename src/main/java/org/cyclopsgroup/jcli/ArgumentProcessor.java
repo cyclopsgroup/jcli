@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.Properties;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 

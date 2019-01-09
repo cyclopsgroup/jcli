@@ -121,7 +121,7 @@ public class GnuParserTest {
     ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance(Simple.class, new GnuParser());
     Simple b = new Simple();
     p.process(new String[] {"-1", "--1", "-2", "-3", "-4"}, b);
-    assertEquals("-3", b.getStringFIeld2());
+    assertEquals("-3", b.getStringField2());
     assertEquals(Arrays.asList("-1", "--1", "-4"), b.getValues());
   }
 

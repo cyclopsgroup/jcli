@@ -44,7 +44,7 @@ public class Simple implements AutoCompletable {
 
   private String stringField1;
 
-  private String stringFIeld2;
+  private String stringField2;
 
   private List<String> values;
 
@@ -65,8 +65,8 @@ public class Simple implements AutoCompletable {
   /**
    * @return Another string option
    */
-  public final String getStringFIeld2() {
-    return stringFIeld2;
+  public final String getStringField2() {
+    return stringField2;
   }
 
   /**
@@ -108,11 +108,11 @@ public class Simple implements AutoCompletable {
   }
 
   /**
-   * @param stringFIeld2 Another string option
+   * @param stringField2 Another string option
    */
   @Option(name = "2", longName = "field2")
-  public final void setStringFIeld2(String stringFIeld2) {
-    this.stringFIeld2 = stringFIeld2;
+  public final void setStringField2(String stringFIeld2) {
+    this.stringField2 = stringFIeld2;
   }
 
   /**
