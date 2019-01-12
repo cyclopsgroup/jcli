@@ -28,7 +28,7 @@ public class DefaultArgumentProcessorTest {
     Properties props = new Properties();
     props.setProperty("field1", "abc");
     props.setProperty("field2", "xyz");
-    Simple s = ArgumentProcessor.forType(Simple.class).process(props, new Simple());
+    Simple s = ArgumentProcessor.forType(Simple.class).processProperties(props, new Simple());
     assertThat(s.getStringField1()).isEqualTo("abc");
     assertThat(s.getStringField2()).isEqualTo("xyz");
   }
