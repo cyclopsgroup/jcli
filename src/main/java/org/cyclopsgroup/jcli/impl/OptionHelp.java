@@ -21,7 +21,7 @@ public class OptionHelp {
   /**
    * @return Description of option
    */
-  @FixLengthField(start = 26, length = 228)
+  @FixLengthField(start = 30, length = 220)
   public String getDescription() {
     String desc = option.getDescription();
     if (!option.isFlag() && StringUtils.isNotBlank(option.getDefaultValue())) {
@@ -33,7 +33,7 @@ public class OptionHelp {
   /**
    * @return Name of option value
    */
-  @FixLengthField(start = 15, length = 10)
+  @FixLengthField(start = 20, length = 9)
   public String getDisplayName() {
     return option.isFlag() ? null : "<" + option.getDisplayName() + ">";
   }
@@ -41,7 +41,7 @@ public class OptionHelp {
   /**
    * @return Long name of option
    */
-  @FixLengthField(start = 4, length = 10)
+  @FixLengthField(start = 3, length = 16)
   public String getLongName() {
     return StringUtils.isBlank(option.getLongName()) ? null : "--" + option.getLongName();
   }
@@ -49,7 +49,7 @@ public class OptionHelp {
   /**
    * @return Short name of option
    */
-  @FixLengthField(start = 1, length = 2)
+  @FixLengthField(start = 0, length = 2)
   public String getName() {
     return "-" + option.getName();
   }
