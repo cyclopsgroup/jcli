@@ -87,7 +87,7 @@ public abstract class ArgumentProcessor<T> {
   /**
    * Process a properties of name/value pairs.
    */
-  public abstract T process(Properties props, T bean);
+  public abstract T processProperties(Properties props, T bean);
 
   /**
    * Verifies if given arguments meet requirement defined for processor.

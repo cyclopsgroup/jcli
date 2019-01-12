@@ -45,7 +45,7 @@ class DefaultArgumentProcessor<T> extends ArgumentProcessor<T> {
   }
 
   @Override
-  public T process(Properties props, T bean) {
+  public T processProperties(Properties props, T bean) {
     AnnotationParsingContext<T> context = createParsingContextInternal();
     Map<String, Option> optionByName = new HashMap<>();
     for (Option option : context.options()) {
