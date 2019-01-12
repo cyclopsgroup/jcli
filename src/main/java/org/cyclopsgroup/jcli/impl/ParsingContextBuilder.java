@@ -78,10 +78,10 @@ class ParsingContextBuilder<T> {
   }
 
   private static <T> ImmutableList<ValueReference<T>> referenceOfFields(Class<T> beanType) {
-    return ImmutableList
-        .copyOf(FluentIterable.from(beanType.getFields()).append(beanType.getDeclaredFields())
-            .toList().stream().map(f -> ValueReference.<T>instanceOf(f))
-            .collect(Collectors.toMap(f -> f.getName(), f -> f)).values());
+    Map<String, ValueReference<T>> refMap = new HashMap<>();
+    FluentIterable.from(beanType.getFields()).append(beanType.getDeclaredFields()).toList().stream()
+        .map(f -> ValueReference.<T>instanceOf(f)).forEach(f -> refMap.put(f.getName(), f));
+    return ImmutableList.copyOf(refMap.values());
   }
 
   private final Class<T> beanType;
