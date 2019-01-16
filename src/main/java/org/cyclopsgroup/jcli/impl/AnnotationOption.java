@@ -1,7 +1,5 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.cyclopsgroup.jcli.annotation.Option;
 
 class AnnotationOption implements org.cyclopsgroup.jcli.spi.Option {
@@ -15,11 +13,6 @@ class AnnotationOption implements org.cyclopsgroup.jcli.spi.Option {
     this.option = option;
     this.flag = flag;
     this.multiValue = multiValue;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
   }
 
   @Override
@@ -45,11 +38,6 @@ class AnnotationOption implements org.cyclopsgroup.jcli.spi.Option {
   @Override
   public String getName() {
     return option.name();
-  }
-
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this);
   }
 
   @Override

@@ -2,8 +2,7 @@ package org.cyclopsgroup.jcli.spi;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.google.common.base.MoreObjects;
 
 /**
  * Data that comes from command arguments
@@ -38,7 +37,8 @@ public final class CommandLine {
 
     @Override
     public String toString() {
-      return ToStringBuilder.reflectionToString(this);
+      return MoreObjects.toStringHelper(getClass().getSimpleName()).addValue(name).addValue(value)
+          .addValue(shortName).toString();
     }
 
   }
@@ -71,6 +71,7 @@ public final class CommandLine {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this);
+    return MoreObjects.toStringHelper(getClass()).addValue(arguments).addValue(optionValues)
+        .toString();
   }
 }

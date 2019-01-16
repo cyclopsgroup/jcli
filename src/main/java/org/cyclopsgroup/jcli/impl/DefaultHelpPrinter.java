@@ -2,11 +2,10 @@ package org.cyclopsgroup.jcli.impl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import org.apache.commons.lang3.StringUtils;
 import org.cyclopsgroup.caff.format.Format;
 import org.cyclopsgroup.caff.format.Formats;
 import org.cyclopsgroup.jcli.spi.Option;
+import com.google.common.base.Strings;
 
 class DefaultHelpPrinter {
   static <T> void printHelp(AnnotationParsingContext<T> context, PrintWriter out)
@@ -14,7 +13,7 @@ class DefaultHelpPrinter {
     out.println("[USAGE]");
     out.println("  " + context.cli().getName() + (context.options().isEmpty() ? "" : " <OPTIONS>")
         + (context.argument() == null ? "" : " <ARGS>"));
-    if (StringUtils.isNotBlank(context.cli().getDescription())) {
+    if (!Strings.isNullOrEmpty(context.cli().getDescription())) {
       out.println("[DESCRIPTION]");
       out.println("  " + context.cli().getDescription());
     }
@@ -31,7 +30,7 @@ class DefaultHelpPrinter {
       out.println("  <" + context.argument().getDisplayName() + ">... "
           + context.argument().getDescription());
     }
-    if (!StringUtils.isBlank(context.cli().getNote())) {
+    if (!Strings.isNullOrEmpty(context.cli().getNote())) {
       out.println("[NOTE]");
       out.println("  " + context.cli().getNote());
     }

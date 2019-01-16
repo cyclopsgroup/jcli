@@ -2,14 +2,13 @@ package org.cyclopsgroup.jcli.example;
 
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.cyclopsgroup.caff.conversion.DateField;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
+import com.google.common.base.MoreObjects;
 
 /**
  * An example bean that shows how JCli populates POJO with arguments
@@ -90,7 +89,8 @@ public class UserControl {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this);
+    return MoreObjects.toStringHelper(getClass()).addValue(userNames).addValue(intValue)
+        .addValue(creationDate).toString();
   }
 
   /**

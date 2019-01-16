@@ -3,8 +3,7 @@ package org.cyclopsgroup.jcli;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.lang3.Validate;
+import com.google.common.base.Preconditions;
 
 /**
  * Argument validation result coming from {@link ArgumentProcessor#validate(String[])}
@@ -26,8 +25,8 @@ public final class ValidationResult {
      * @param optionName Name of missing option
      */
     public OptionMissing(String optionName) {
-      Validate.notNull(optionName, "Name of missing option can't be NULL");
-      this.optionName = optionName;
+      this.optionName =
+          Preconditions.checkNotNull(optionName, "Name of missing option can't be null.");
     }
 
     /**
@@ -50,8 +49,8 @@ public final class ValidationResult {
      * @param optionName Name of unexpected option
      */
     public UnexpectedOption(String optionName) {
-      Validate.notNull(optionName, "Name of missing option can't be NULL");
-      this.optionName = optionName;
+      this.optionName =
+          Preconditions.checkNotNull(optionName, "Name of missing option can't be null.");
     }
 
     /**

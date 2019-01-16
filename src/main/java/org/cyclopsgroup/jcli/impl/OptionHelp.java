@@ -1,9 +1,9 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.apache.commons.lang3.StringUtils;
 import org.cyclopsgroup.caff.format.FixLengthField;
 import org.cyclopsgroup.caff.format.FixLengthType;
 import org.cyclopsgroup.jcli.spi.Option;
+import com.google.common.base.Strings;
 
 /**
  * An internal POJO to help printing out usage page
@@ -24,7 +24,7 @@ public class OptionHelp {
   @FixLengthField(start = 30, length = 220)
   public String getDescription() {
     String desc = option.getDescription();
-    if (!option.isFlag() && StringUtils.isNotBlank(option.getDefaultValue())) {
+    if (!option.isFlag() && !Strings.isNullOrEmpty(option.getDefaultValue())) {
       desc += "(Default value is " + option.getDefaultValue() + ")";
     }
     return desc;
@@ -43,7 +43,7 @@ public class OptionHelp {
    */
   @FixLengthField(start = 3, length = 16)
   public String getLongName() {
-    return StringUtils.isBlank(option.getLongName()) ? null : "--" + option.getLongName();
+    return Strings.isNullOrEmpty(option.getLongName()) ? null : "--" + option.getLongName();
   }
 
   /**

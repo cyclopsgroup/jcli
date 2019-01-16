@@ -67,10 +67,11 @@ public abstract class ArgumentProcessor<T> {
   public abstract void printHelp(PrintWriter out) throws IOException;
 
   /**
-   * Process argument list and pass values to given bean
+   * Process argument list and pass values to given bean.
    *
-   * @param arguments List of arguments
-   * @param bean Bean to pass values to
+   * @param arguments list of arguments.
+   * @param bean the bean to pass values to.
+   * @return the processed bean.
    */
   public abstract T process(List<String> arguments, T bean);
 
@@ -79,6 +80,7 @@ public abstract class ArgumentProcessor<T> {
    *
    * @param arguments Arary of arguments
    * @param bean Bean to pass values to
+   * @return the processed bean.
    */
   public T process(String[] arguments, T bean) {
     return process(Arrays.asList(arguments), bean);
@@ -86,6 +88,10 @@ public abstract class ArgumentProcessor<T> {
 
   /**
    * Process a properties of name/value pairs.
+   * 
+   * @param props a properties where key matches the long name of options.
+   * @param bean the bean to populate.
+   * @return the populated bean.
    */
   public abstract T processProperties(Properties props, T bean);
 

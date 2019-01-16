@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.cyclopsgroup.caff.token.TokenEvent;
 import org.cyclopsgroup.caff.token.TokenEventHandler;
 import org.cyclopsgroup.caff.token.ValueTokenizer;
@@ -19,6 +16,8 @@ import org.jline.reader.Candidate;
 import org.jline.reader.Completer;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * JLine completor implemented with JCli
@@ -27,7 +26,7 @@ import org.jline.reader.ParsedLine;
  */
 public class CliCompletor implements Completer {
   private static List<String> filterList(List<String> list, String prefix) {
-    if (StringUtils.isEmpty(prefix) || list == null) {
+    if (Strings.isNullOrEmpty(prefix)) {
       return list;
     }
     List<String> results = new ArrayList<String>();
@@ -50,8 +49,8 @@ public class CliCompletor implements Completer {
    * @param tokenizer Tokenizer for argument parsing
    */
   public CliCompletor(final Object cliBean, final ValueTokenizer tokenizer) {
-    Validate.notNull(cliBean, "Cli bean can't be NULL");
-    Validate.notNull(tokenizer, "String tokenizer can't be NULL");
+    Preconditions.checkNotNull(cliBean, "Cli bean can't be null.");
+    Preconditions.checkNotNull(tokenizer, "String tokenizer can't be null.");
     context = ArgumentProcessor.forType(cliBean.getClass()).createParsingContext();
     if (cliBean instanceof AutoCompletable) {
       this.completable = (AutoCompletable) cliBean;
@@ -74,7 +73,7 @@ public class CliCompletor implements Completer {
     ArgumentsInspector inspector = new ArgumentsInspector(context);
     final AtomicBoolean terminated = new AtomicBoolean(true);
     final AtomicInteger lastWordStart = new AtomicInteger(0);
-    if (StringUtils.isNotEmpty(command)) {
+    if (!Strings.isNullOrEmpty(command)) {
       final List<String> args = new ArrayList<String>();
       tokenizer.parse(command, new TokenEventHandler() {
 
@@ -121,7 +120,7 @@ public class CliCompletor implements Completer {
 
   private List<String> suggestArguments(String partialArgument) {
     List<String> results;
-    if (StringUtils.isEmpty(partialArgument)) {
+    if (Strings.isNullOrEmpty(partialArgument)) {
       results = completable.suggestArgument(null);
     } else {
       results = completable.suggestArgument(partialArgument);
@@ -154,7 +153,7 @@ public class CliCompletor implements Completer {
 
   private List<String> suggestOptionValue(Option option, String partialValue) {
     List<String> results;
-    if (StringUtils.isEmpty(partialValue)) {
+    if (Strings.isNullOrEmpty(partialValue)) {
       results = completable.suggestOption(option.getName(), null);
     } else {
       results = completable.suggestOption(option.getName(), partialValue);

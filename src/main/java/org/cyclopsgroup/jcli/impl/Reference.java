@@ -1,8 +1,8 @@
 package org.cyclopsgroup.jcli.impl;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
+import com.google.common.base.MoreObjects;
 
 /**
  * A reference to allow to set value as an attribute of bean
@@ -25,6 +25,6 @@ abstract class Reference<T> {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this);
+    return MoreObjects.toStringHelper(getClass()).addValue(longName).addValue(ref).toString();
   }
 }
