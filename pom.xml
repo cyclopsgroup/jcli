@@ -11,14 +11,18 @@
   </parent>
   <artifactId>jcli</artifactId>
   <name>jcli</name>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>1.0.1</version>
   <description>Annotation based command line arguments parser</description>
-  <url>http://cyclopsgroup.org/projects/jcli</url>
+  <url>https://github.com/jiaqi/jcli</url>
   <inceptionYear>2008</inceptionYear>
   <issueManagement>
     <system>github</system>
     <url>https://github.com/jiaqi/jcli/issues</url>
   </issueManagement>
+  <ciManagement>
+    <system>travis</system>
+    <url>https://travis-ci.org/jiaqi/jcli</url>
+  </ciManagement>
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -68,9 +72,7 @@
   <distributionManagement>
     <site>
       <id>cyclopsgroup.server</id>
-      <url>
-                s3://${dist.bucketName}/projects/jcli
-            </url>
+      <url>s3://${dist.bucketName}/projects/jcli</url>
     </site>
   </distributionManagement>
 </project>
