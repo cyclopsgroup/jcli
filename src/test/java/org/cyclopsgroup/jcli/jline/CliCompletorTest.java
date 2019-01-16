@@ -2,11 +2,9 @@ package org.cyclopsgroup.jcli.jline;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.cyclopsgroup.caff.token.QuotedValueTokenizer;
 import org.cyclopsgroup.jcli.Simple;
 import org.jline.reader.Candidate;
@@ -17,11 +15,6 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Test case for {@link CliCompletor}
- *
- * @author <a href="mailto:jiaqi.guo@gmail.com">Jiaqi Guo</a>
- */
 public class CliCompletorTest {
   private List<Candidate> candidates;
 
@@ -33,11 +26,6 @@ public class CliCompletorTest {
 
   private ParsedLine parsedLine;
 
-  /**
-   * Set up completor to test
-   *
-   * @throws IntrospectionException
-   */
   @Before
   public void setUp() throws IntrospectionException {
     cc = new CliCompletor(new Simple(), new QuotedValueTokenizer());
@@ -47,9 +35,6 @@ public class CliCompletorTest {
     parsedLine = context.mock(ParsedLine.class);
   }
 
-  /**
-   * @throws IntrospectionException
-   */
   @Test
   public void testCompleteWithEmpty() throws IntrospectionException {
     context.checking(new Expectations() {
