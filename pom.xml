@@ -7,11 +7,11 @@
   <parent>
     <groupId>org.cyclopsgroup</groupId>
     <artifactId>cyclopsgroup-java-parent</artifactId>
-    <version>0.7.0</version>
+    <version>0.7.1</version>
   </parent>
   <artifactId>jcli</artifactId>
   <name>jcli</name>
-  <version>1.0.1</version>
+  <version>1.1.0-SNAPSHOT</version>
   <description>Annotation based command line arguments parser</description>
   <url>https://github.com/jiaqi/jcli</url>
   <inceptionYear>2008</inceptionYear>
