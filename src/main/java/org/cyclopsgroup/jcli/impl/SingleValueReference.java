@@ -4,8 +4,8 @@ import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
 
 class SingleValueReference<T> extends Reference<T> {
-  SingleValueReference(Class<? extends T> beanType, Converter<?> converter, ValueReference<T> ref,
-      String longName) {
+  SingleValueReference(
+      Class<? extends T> beanType, Converter<?> converter, ValueReference<T> ref, String longName) {
     super(converter, ref, longName);
   }
 

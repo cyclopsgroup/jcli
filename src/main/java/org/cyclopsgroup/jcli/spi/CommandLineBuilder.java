@@ -12,9 +12,7 @@ public final class CommandLineBuilder {
 
   private final CommandLine cl = new CommandLine();
 
-  /**
-   * @return The command line instance with information that has been added so far
-   */
+  /** @return The command line instance with information that has been added so far */
   public CommandLine toCommandLine() {
     return cl;
   }

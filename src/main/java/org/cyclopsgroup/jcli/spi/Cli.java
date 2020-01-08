@@ -6,18 +6,12 @@ package org.cyclopsgroup.jcli.spi;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public interface Cli {
-  /**
-   * @return Description of command line
-   */
+  /** @return Description of command line */
   String getDescription();
 
-  /**
-   * @return Name of command line
-   */
+  /** @return Name of command line */
   String getName();
 
-  /**
-   * @return Not of command line in the end
-   */
+  /** @return Not of command line in the end */
   String getNote();
 }

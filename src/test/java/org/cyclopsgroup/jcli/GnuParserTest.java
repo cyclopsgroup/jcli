@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.junit.Test;
 
 /**
@@ -16,9 +15,7 @@ import org.junit.Test;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public class GnuParserTest {
-  /**
-   * Verify use cases with all possible types of arguments
-   */
+  /** Verify use cases with all possible types of arguments */
   @Test
   public void testCombination() {
     ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance(Simple.class, new GnuParser());
@@ -31,9 +28,7 @@ public class GnuParserTest {
     assertFalse(b.isBooleanField());
   }
 
-  /**
-   * Verify that long option name with dash is acceptable
-   */
+  /** Verify that long option name with dash is acceptable */
   @Test
   public void testLongOptionWithDash() {
     ArgumentProcessor<WithoutCli> p =
@@ -43,9 +38,7 @@ public class GnuParserTest {
     assertEquals("x", b.optionWithDash);
   }
 
-  /**
-   * Verify empty arguments doesn't reset default arguments
-   */
+  /** Verify empty arguments doesn't reset default arguments */
   @Test
   public void testNormalBeanWithoutValues() {
     ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance(Simple.class, new GnuParser());
@@ -58,9 +51,7 @@ public class GnuParserTest {
     assertFalse(b.isBooleanField());
   }
 
-  /**
-   * Verify simple argument can be handled correctly
-   */
+  /** Verify simple argument can be handled correctly */
   @Test
   public void testSimpleArgumentWithMultiValues() {
     ArgumentProcessor<WithSimpleArgument> p =
@@ -70,9 +61,7 @@ public class GnuParserTest {
     assertEquals("a", b.getArg());
   }
 
-  /**
-   * Verify simple argument without value can be handled correctly
-   */
+  /** Verify simple argument without value can be handled correctly */
   @Test
   public void testSimpleArgumentWithoutValue() {
     ArgumentProcessor<WithSimpleArgument> p =
@@ -90,9 +79,7 @@ public class GnuParserTest {
     assertEquals("-1", s.getStringField1());
   }
 
-  /**
-   * Verify boolean is handled correctly
-   */
+  /** Verify boolean is handled correctly */
   @Test
   public void testWithFlag() {
     ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance(Simple.class, new GnuParser());
@@ -101,9 +88,7 @@ public class GnuParserTest {
     assertTrue(b.isBooleanField());
   }
 
-  /**
-   * Verify multi value option is handled correctly
-   */
+  /** Verify multi value option is handled correctly */
   @Test
   public void testWithMultiValueOption() {
     ArgumentProcessor<WithMultiValueOption> p =
@@ -113,9 +98,7 @@ public class GnuParserTest {
     assertEquals(Arrays.asList("b", "c", "e"), b.getOptions());
   }
 
-  /**
-   * Verify negative numbers are accepted
-   */
+  /** Verify negative numbers are accepted */
   @Test
   public void testWithNegativeNumbers() {
     ArgumentProcessor<Simple> p = ArgumentProcessor.newInstance(Simple.class, new GnuParser());
@@ -125,9 +108,7 @@ public class GnuParserTest {
     assertEquals(Arrays.asList("-1", "--1", "-4"), b.getValues());
   }
 
-  /**
-   * Verify bean without Cli annotation is acceptable
-   */
+  /** Verify bean without Cli annotation is acceptable */
   @Test
   public void testWithoutCli() {
     ArgumentProcessor<WithoutCli> p =

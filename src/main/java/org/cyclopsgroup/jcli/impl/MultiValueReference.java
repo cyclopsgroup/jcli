@@ -2,15 +2,18 @@ package org.cyclopsgroup.jcli.impl;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
 
 class MultiValueReference<T> extends Reference<T> {
   private final Class<?> listType;
 
-  MultiValueReference(Class<? extends T> beanType, Converter<?> converter, ValueReference<T> ref,
-      String longName, Class<?> listType) {
+  MultiValueReference(
+      Class<? extends T> beanType,
+      Converter<?> converter,
+      ValueReference<T> ref,
+      String longName,
+      Class<?> listType) {
     super(converter, ref, longName);
     this.listType = listType;
   }

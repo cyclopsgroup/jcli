@@ -1,6 +1,7 @@
 package org.cyclopsgroup.jcli;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import java.util.Arrays;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -42,14 +43,17 @@ public class FieldAccessTest {
 
   @Test
   public void testProcessWithAllParameters() {
-    assertThat(ArgumentProcessor.forType(Options.class)
-        .process(Arrays.asList("-i", "4", "--string_field", "abc"), new Options()))
-            .isEqualTo(new Options("abc", 4));
+    assertThat(
+            ArgumentProcessor.forType(Options.class)
+                .process(Arrays.asList("-i", "4", "--string_field", "abc"), new Options()))
+        .isEqualTo(new Options("abc", 4));
   }
 
   @Test
   public void testProcessWithDefault() {
-    assertThat(ArgumentProcessor.forType(Options.class).process(Arrays.asList("--int_field", "4"),
-        new Options())).isEqualTo(new Options(null, 4));
+    assertThat(
+            ArgumentProcessor.forType(Options.class)
+                .process(Arrays.asList("--int_field", "4"), new Options()))
+        .isEqualTo(new Options(null, 4));
   }
 }

@@ -12,8 +12,8 @@ import org.cyclopsgroup.jcli.spi.CommandLineParser;
  */
 public class DefaultArgumentProcessorFactory extends ArgumentProcessorFactory {
   @Override
-  protected <T> ArgumentProcessor<T> newProcessor(Class<? extends T> beanType,
-      CommandLineParser parser) {
+  protected <T> ArgumentProcessor<T> newProcessor(
+      Class<? extends T> beanType, CommandLineParser parser) {
     try {
       return new DefaultArgumentProcessor<T>(beanType, parser);
     } catch (RuntimeException e) {

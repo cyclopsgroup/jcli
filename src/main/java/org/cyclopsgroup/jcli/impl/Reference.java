@@ -1,8 +1,8 @@
 package org.cyclopsgroup.jcli.impl;
 
+import com.google.common.base.MoreObjects;
 import org.cyclopsgroup.caff.conversion.Converter;
 import org.cyclopsgroup.caff.ref.ValueReference;
-import com.google.common.base.MoreObjects;
 
 /**
  * A reference to allow to set value as an attribute of bean

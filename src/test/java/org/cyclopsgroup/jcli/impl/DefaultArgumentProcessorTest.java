@@ -1,6 +1,7 @@
 package org.cyclopsgroup.jcli.impl;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

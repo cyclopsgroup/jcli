@@ -1,6 +1,7 @@
 package org.cyclopsgroup.jcli.jline;
 
 import static org.junit.Assert.assertEquals;
+
 import java.beans.IntrospectionException;
 import org.cyclopsgroup.jcli.ArgumentProcessor;
 import org.cyclopsgroup.jcli.Simple;

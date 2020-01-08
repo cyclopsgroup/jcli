@@ -6,20 +6,12 @@ package org.cyclopsgroup.jcli.example;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public enum UserControlAction {
-  /**
-   * Add something
-   */
+  /** Add something */
   ADD,
-  /**
-   * Delete something
-   */
+  /** Delete something */
   DELETE,
-  /**
-   * Change something
-   */
+  /** Change something */
   EDIT,
-  /**
-   * Display something
-   */
+  /** Display something */
   DISPLAY;
 }

@@ -8,19 +8,13 @@ import java.util.List;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public interface ParsingContext {
-  /**
-   * @return Command line model
-   */
+  /** @return Command line model */
   Cli cli();
 
-  /**
-   * @return Argument model
-   */
+  /** @return Argument model */
   Argument argument();
 
-  /**
-   * @return List of all options
-   */
+  /** @return List of all options */
   List<Option> options();
 
   /**

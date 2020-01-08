@@ -2,7 +2,6 @@ package org.cyclopsgroup.jcli;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
-
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
 /**
@@ -12,8 +11,8 @@ import org.cyclopsgroup.jcli.spi.CommandLineParser;
  */
 public abstract class ArgumentProcessorFactory {
   /**
-   * @return Instance of ArgumentProcessorFactory. The implementation is determined by
-   *         {@link ServiceLoader}
+   * @return Instance of ArgumentProcessorFactory. The implementation is determined by {@link
+   *     ServiceLoader}
    */
   static ArgumentProcessorFactory getInstance() {
     Iterator<ArgumentProcessorFactory> factories =
@@ -21,8 +20,10 @@ public abstract class ArgumentProcessorFactory {
     if (factories.hasNext()) {
       return factories.next();
     }
-    throw new AssertionError("Can't find an implementation of "
-        + ArgumentProcessorFactory.class.getName() + " from service loader");
+    throw new AssertionError(
+        "Can't find an implementation of "
+            + ArgumentProcessorFactory.class.getName()
+            + " from service loader");
   }
 
   /**
@@ -34,6 +35,6 @@ public abstract class ArgumentProcessorFactory {
    * @param parser Command line parser that is aware of command line syntax
    * @return Instance of argument processor implementation
    */
-  protected abstract <T> ArgumentProcessor<T> newProcessor(Class<? extends T> beanType,
-      CommandLineParser parser);
+  protected abstract <T> ArgumentProcessor<T> newProcessor(
+      Class<? extends T> beanType, CommandLineParser parser);
 }

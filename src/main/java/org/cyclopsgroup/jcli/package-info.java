@@ -1,4 +1,2 @@
-/**
- * General utilities used by jcli package
- */
+/** General utilities used by jcli package */
 package org.cyclopsgroup.jcli;

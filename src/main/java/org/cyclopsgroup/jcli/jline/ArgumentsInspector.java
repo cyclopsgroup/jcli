@@ -3,7 +3,6 @@ package org.cyclopsgroup.jcli.jline;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
@@ -23,17 +22,13 @@ class ArgumentsInspector {
 
   private ArgumentsInspectorState state = ArgumentsInspectorState.READY;
 
-  /**
-   * @param context Parsing context
-   */
+  /** @param context Parsing context */
   ArgumentsInspector(ParsingContext context) {
     this.context = context;
     remainingOptions = new HashSet<Option>(context.options());
   }
 
-  /**
-   * @param argument Argument to consume
-   */
+  /** @param argument Argument to consume */
   void consume(String argument) {
     if (argument.startsWith("--")) {
       state = ArgumentsInspectorState.LONG_OPTION;
@@ -70,9 +65,7 @@ class ArgumentsInspector {
     currentValue = argument;
   }
 
-  /**
-   * End the process
-   */
+  /** End the process */
   void end() {
     switch (state) {
       case OPTION:
@@ -96,30 +89,22 @@ class ArgumentsInspector {
     currentValue = null;
   }
 
-  /**
-   * @return The option being processed currently
-   */
+  /** @return The option being processed currently */
   Option getCurrentOption() {
     return currentOption;
   }
 
-  /**
-   * @return Current value
-   */
+  /** @return Current value */
   String getCurrentValue() {
     return currentValue;
   }
 
-  /**
-   * @return Set of remaining options
-   */
+  /** @return Set of remaining options */
   Set<Option> getRemainingOptions() {
     return Collections.unmodifiableSet(remainingOptions);
   }
 
-  /**
-   * @return Current parsing state
-   */
+  /** @return Current parsing state */
   ArgumentsInspectorState getState() {
     return state;
   }

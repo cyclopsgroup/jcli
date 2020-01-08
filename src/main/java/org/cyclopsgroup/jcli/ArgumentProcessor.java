@@ -40,8 +40,8 @@ public abstract class ArgumentProcessor<T> {
    * @param parser command line parser that is aware of command line syntax
    * @return instance of an implementation of argument processor.
    */
-  public static <T> ArgumentProcessor<T> newInstance(Class<? extends T> beanType,
-      CommandLineParser parser) {
+  public static <T> ArgumentProcessor<T> newInstance(
+      Class<? extends T> beanType, CommandLineParser parser) {
     return ArgumentProcessorFactory.getInstance().newProcessor(beanType, parser);
   }
 
@@ -55,9 +55,7 @@ public abstract class ArgumentProcessor<T> {
     return forType(beanType);
   }
 
-  /**
-   * @return Implementation of parsing context
-   */
+  /** @return Implementation of parsing context */
   public abstract ParsingContext createParsingContext();
 
   /**
@@ -88,7 +86,7 @@ public abstract class ArgumentProcessor<T> {
 
   /**
    * Process a properties of name/value pairs.
-   * 
+   *
    * @param props a properties where key matches the long name of options.
    * @param bean the bean to populate.
    * @return the populated bean.

@@ -3,7 +3,6 @@ package org.cyclopsgroup.jcli.impl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import org.cyclopsgroup.jcli.spi.Argument;
 import org.cyclopsgroup.jcli.spi.Cli;
 import org.cyclopsgroup.jcli.spi.Option;
@@ -24,8 +23,11 @@ class AnnotationParsingContext<T> implements ParsingContext {
    * @param cli Command line model
    * @param argument Argument definition
    */
-  AnnotationParsingContext(Map<String, Reference<T>> referenceMap, List<AnnotationOption> options,
-      AnnotationCli cli, AnnotationArgument argument) {
+  AnnotationParsingContext(
+      Map<String, Reference<T>> referenceMap,
+      List<AnnotationOption> options,
+      AnnotationCli cli,
+      AnnotationArgument argument) {
     this.options = options;
     this.referenceMap = referenceMap;
     this.cli = cli;

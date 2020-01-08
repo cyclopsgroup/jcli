@@ -1,29 +1,20 @@
 package org.cyclopsgroup.jcli;
 
+import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.google.common.base.Preconditions;
 
-/**
- * Argument validation result coming from {@link ArgumentProcessor#validate(String[])}
- */
+/** Argument validation result coming from {@link ArgumentProcessor#validate(String[])} */
 public final class ValidationResult {
-  /**
-   * A violation indicating required argument is missing
-   */
-  public static final class ArgumentMissing extends Violation {
-  }
+  /** A violation indicating required argument is missing */
+  public static final class ArgumentMissing extends Violation {}
 
-  /**
-   * Type of violation where a required option is missing
-   */
+  /** Type of violation where a required option is missing */
   public static final class OptionMissing extends Violation {
     private final String optionName;
 
-    /**
-     * @param optionName Name of missing option
-     */
+    /** @param optionName Name of missing option */
     public OptionMissing(String optionName) {
       this.optionName =
           Preconditions.checkNotNull(optionName, "Name of missing option can't be null.");
@@ -39,15 +30,11 @@ public final class ValidationResult {
     }
   }
 
-  /**
-   * Violation where an unexpected option value is found
-   */
+  /** Violation where an unexpected option value is found */
   public static final class UnexpectedOption extends Violation {
     private final String optionName;
 
-    /**
-     * @param optionName Name of unexpected option
-     */
+    /** @param optionName Name of unexpected option */
     public UnexpectedOption(String optionName) {
       this.optionName =
           Preconditions.checkNotNull(optionName, "Name of missing option can't be null.");
@@ -63,10 +50,8 @@ public final class ValidationResult {
     }
   }
 
-  /**
-   * A validation violation
-   */
-  public static abstract class Violation {
+  /** A validation violation */
+  public abstract static class Violation {
     Violation() {}
   }
 
@@ -89,12 +74,9 @@ public final class ValidationResult {
    */
   public List<Violation> getViolations() {
     return Collections.unmodifiableList(violations);
-
   }
 
-  /**
-   * @return True if there is not violation
-   */
+  /** @return True if there is not violation */
   public boolean isValid() {
     return violations.isEmpty();
   }

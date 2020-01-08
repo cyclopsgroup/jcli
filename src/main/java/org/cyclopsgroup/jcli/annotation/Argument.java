@@ -16,13 +16,9 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Argument {
-  /**
-   * @return String description of argument which will be displayed in usage
-   */
+  /** @return String description of argument which will be displayed in usage */
   String description() default "";
 
-  /**
-   * @return Name of argument displayed in usage
-   */
+  /** @return Name of argument displayed in usage */
   String displayName() default "arg";
 }

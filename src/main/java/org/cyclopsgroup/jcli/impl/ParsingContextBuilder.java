@@ -1,5 +1,7 @@
 package org.cyclopsgroup.jcli.impl;
 
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -19,8 +21,6 @@ import org.cyclopsgroup.jcli.annotation.Argument;
 import org.cyclopsgroup.jcli.annotation.Cli;
 import org.cyclopsgroup.jcli.annotation.MultiValue;
 import org.cyclopsgroup.jcli.annotation.Option;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 
 /**
  * Internal builder to create instance of {@link AnnotationParsingContext}
@@ -30,8 +30,8 @@ import com.google.common.collect.ImmutableList;
  */
 class ParsingContextBuilder<T> {
   @SuppressWarnings("unchecked")
-  private static <B, P> Reference<B> createReference(Class<B> beanType, ValueReference<B> reference,
-      String longName) {
+  private static <B, P> Reference<B> createReference(
+      Class<B> beanType, ValueReference<B> reference, String longName) {
     Class<P> valueType = (Class<P>) reference.getType();
     MultiValue multiValue = reference.getAnnotation(MultiValue.class);
     if (multiValue != null) {
@@ -39,8 +39,8 @@ class ParsingContextBuilder<T> {
     }
     Converter<P> converter = new AnnotatedConverter<P>(valueType, reference.getAnontatedElements());
     if (multiValue != null) {
-      return new MultiValueReference<B>(beanType, converter, reference, longName,
-          multiValue.listType());
+      return new MultiValueReference<B>(
+          beanType, converter, reference, longName, multiValue.listType());
     }
     return new SingleValueReference<B>(beanType, converter, reference, longName);
   }
@@ -54,8 +54,8 @@ class ParsingContextBuilder<T> {
    * @return Annotation or null if it's not found
    */
   @Nullable
-  private static <A extends Annotation> A getAnnotation(PropertyDescriptor descriptor,
-      Class<A> type) {
+  private static <A extends Annotation> A getAnnotation(
+      PropertyDescriptor descriptor, Class<A> type) {
     A a = null;
     if (descriptor.getWriteMethod() != null) {
       a = descriptor.getWriteMethod().getAnnotation(type);
@@ -74,13 +74,15 @@ class ParsingContextBuilder<T> {
       throw new RuntimeException("Bean " + beanType + " is not correctly defined", e);
     }
     return Arrays.asList(beanInfo.getPropertyDescriptors()).stream()
-        .map(d -> ValueReference.<T>instanceOf(d)).collect(Collectors.toList());
+        .map(d -> ValueReference.<T>instanceOf(d))
+        .collect(Collectors.toList());
   }
 
   private static <T> ImmutableList<ValueReference<T>> referenceOfFields(Class<T> beanType) {
     Map<String, ValueReference<T>> refMap = new HashMap<>();
     FluentIterable.from(beanType.getFields()).append(beanType.getDeclaredFields()).toList().stream()
-        .map(f -> ValueReference.<T>instanceOf(f)).forEach(f -> refMap.put(f.getName(), f));
+        .map(f -> ValueReference.<T>instanceOf(f))
+        .forEach(f -> refMap.put(f.getName(), f));
     return ImmutableList.copyOf(refMap.values());
   }
 
@@ -96,8 +98,10 @@ class ParsingContextBuilder<T> {
     Map<String, Reference<T>> references = new HashMap<String, Reference<T>>();
     Argument argument = null;
     List<ValueReference<T>> writableReferences =
-        FluentIterable.from(referenceOfDescriptors(beanType)).append(referenceOfFields(beanType))
-            .filter(r -> r.isWritable()).toList();
+        FluentIterable.from(referenceOfDescriptors(beanType))
+            .append(referenceOfFields(beanType))
+            .filter(r -> r.isWritable())
+            .toList();
 
     for (ValueReference<T> ref : writableReferences) {
       Option option = ref.getAnnotation(Option.class);
@@ -111,13 +115,16 @@ class ParsingContextBuilder<T> {
       Argument arg = ref.getAnnotation(Argument.class);
       if (arg != null) {
         argument = arg;
-        references.put(DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME,
+        references.put(
+            DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME,
             createReference(beanType, ref, DefaultArgumentProcessor.ARGUMENT_REFERNCE_NAME));
         continue;
       }
     }
 
-    return new AnnotationParsingContext<T>(references, options,
+    return new AnnotationParsingContext<T>(
+        references,
+        options,
         new AnnotationCli(beanType.getAnnotation(Cli.class)),
         argument == null ? null : new AnnotationArgument(argument));
   }

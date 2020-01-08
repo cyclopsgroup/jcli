@@ -8,7 +8,10 @@ import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 
 class DefaultBeanProcessor {
-  static <T> void process(AnnotationParsingContext<T> context, List<String> arguments, T bean,
+  static <T> void process(
+      AnnotationParsingContext<T> context,
+      List<String> arguments,
+      T bean,
       CommandLineParser parser) {
     CommandLine cli = parser.parse(arguments, context);
     Map<String, List<String>> multiValues = new HashMap<String, List<String>>();

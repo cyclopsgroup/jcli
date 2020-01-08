@@ -1,18 +1,21 @@
 package org.cyclopsgroup.jcli.impl;
 
+import com.google.common.base.Strings;
 import java.io.IOException;
 import java.io.PrintWriter;
 import org.cyclopsgroup.caff.format.Format;
 import org.cyclopsgroup.caff.format.Formats;
 import org.cyclopsgroup.jcli.spi.Option;
-import com.google.common.base.Strings;
 
 class DefaultHelpPrinter {
   static <T> void printHelp(AnnotationParsingContext<T> context, PrintWriter out)
       throws IOException {
     out.println("[USAGE]");
-    out.println("  " + context.cli().getName() + (context.options().isEmpty() ? "" : " <OPTIONS>")
-        + (context.argument() == null ? "" : " <ARGS>"));
+    out.println(
+        "  "
+            + context.cli().getName()
+            + (context.options().isEmpty() ? "" : " <OPTIONS>")
+            + (context.argument() == null ? "" : " <ARGS>"));
     if (!Strings.isNullOrEmpty(context.cli().getDescription())) {
       out.println("[DESCRIPTION]");
       out.println("  " + context.cli().getDescription());
@@ -27,8 +30,11 @@ class DefaultHelpPrinter {
     }
     if (context.argument() != null) {
       out.println("[ARGS]");
-      out.println("  <" + context.argument().getDisplayName() + ">... "
-          + context.argument().getDescription());
+      out.println(
+          "  <"
+              + context.argument().getDisplayName()
+              + ">... "
+              + context.argument().getDescription());
     }
     if (!Strings.isNullOrEmpty(context.cli().getNote())) {
       out.println("[NOTE]");

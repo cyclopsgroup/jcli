@@ -1,16 +1,13 @@
 package org.cyclopsgroup.jcli;
 
 import java.util.List;
-
 import org.cyclopsgroup.jcli.spi.CommandLine;
 import org.cyclopsgroup.jcli.spi.CommandLineBuilder;
 import org.cyclopsgroup.jcli.spi.CommandLineParser;
 import org.cyclopsgroup.jcli.spi.Option;
 import org.cyclopsgroup.jcli.spi.ParsingContext;
 
-/**
- * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
- */
+/** @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a> */
 public class GnuParser implements CommandLineParser {
   @Override
   public CommandLine parse(List<String> arguments, ParsingContext context) {

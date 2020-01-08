@@ -15,33 +15,21 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Option {
-  /**
-   * @return Default value of option
-   */
+  /** @return Default value of option */
   String defaultValue() default "";
 
-  /**
-   * @return String description of option which is displayed in usage
-   */
+  /** @return String description of option which is displayed in usage */
   String description() default "";
 
-  /**
-   * @return Display name of option
-   */
+  /** @return Display name of option */
   String displayName() default "value";
 
-  /**
-   * @return Long option name specified with double dash
-   */
+  /** @return Long option name specified with double dash */
   String longName() default "";
-  
-  /**
-   * @return Short option name specified with single dash
-   */
+
+  /** @return Short option name specified with single dash */
   String name();
 
-  /**
-   * @return True if option has to be specified explicitly
-   */
+  /** @return True if option has to be specified explicitly */
   boolean required() default false;
 }

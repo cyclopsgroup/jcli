@@ -1,5 +1,7 @@
 package org.cyclopsgroup.jcli.jline;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +18,6 @@ import org.jline.reader.Candidate;
 import org.jline.reader.Completer;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 
 /**
  * JLine completor implemented with JCli
@@ -55,15 +55,16 @@ public class CliCompletor implements Completer {
     if (cliBean instanceof AutoCompletable) {
       this.completable = (AutoCompletable) cliBean;
     } else {
-      this.completable = new AutoCompletable() {
-        public List<String> suggestArgument(String partialArgument) {
-          return Collections.emptyList();
-        }
+      this.completable =
+          new AutoCompletable() {
+            public List<String> suggestArgument(String partialArgument) {
+              return Collections.emptyList();
+            }
 
-        public List<String> suggestOption(String optionName, String partialOption) {
-          return Collections.emptyList();
-        }
-      };
+            public List<String> suggestOption(String optionName, String partialOption) {
+              return Collections.emptyList();
+            }
+          };
     }
     this.tokenizer = tokenizer;
   }
@@ -75,14 +76,16 @@ public class CliCompletor implements Completer {
     final AtomicInteger lastWordStart = new AtomicInteger(0);
     if (!Strings.isNullOrEmpty(command)) {
       final List<String> args = new ArrayList<String>();
-      tokenizer.parse(command, new TokenEventHandler() {
+      tokenizer.parse(
+          command,
+          new TokenEventHandler() {
 
-        public void handleEvent(TokenEvent ev) {
-          args.add(ev.getToken());
-          terminated.set(ev.isTerminated());
-          lastWordStart.set(ev.getStart());
-        }
-      });
+            public void handleEvent(TokenEvent ev) {
+              args.add(ev.getToken());
+              terminated.set(ev.isTerminated());
+              lastWordStart.set(ev.getStart());
+            }
+          });
       for (String arg : args) {
         inspector.consume(arg);
       }
@@ -107,8 +110,8 @@ public class CliCompletor implements Completer {
         candidates.addAll(suggestOptionNames(inspector, inspector.getCurrentValue()));
         break;
       case OPTION_VALUE:
-        candidates
-            .addAll(suggestOptionValue(inspector.getCurrentOption(), inspector.getCurrentValue()));
+        candidates.addAll(
+            suggestOptionValue(inspector.getCurrentOption(), inspector.getCurrentValue()));
         break;
       case ARGUMENT:
         candidates.addAll(suggestArguments(inspector.getCurrentValue()));
@@ -140,7 +143,8 @@ public class CliCompletor implements Completer {
   private List<String> suggestOptionNames(ArgumentsInspector inspector, String value) {
     List<String> results = new ArrayList<String>();
     for (Option o : inspector.getRemainingOptions()) {
-      if (value.startsWith("--") && o.getLongName() != null
+      if (value.startsWith("--")
+          && o.getLongName() != null
           && ("--" + o.getLongName()).startsWith(value)) {
         results.add("--" + o.getLongName());
       } else if (value.startsWith("-") && ("-" + o.getName()).startsWith(value)) {

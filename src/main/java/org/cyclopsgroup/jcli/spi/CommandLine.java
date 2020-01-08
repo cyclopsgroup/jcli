@@ -1,8 +1,8 @@
 package org.cyclopsgroup.jcli.spi;
 
+import com.google.common.base.MoreObjects;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.common.base.MoreObjects;
 
 /**
  * Data that comes from command arguments
@@ -10,23 +10,15 @@ import com.google.common.base.MoreObjects;
  * @author <a href="mailto:jiaqi@cyclopsgroup.org">Jiaqi Guo</a>
  */
 public final class CommandLine {
-  /**
-   * One entry of option value
-   */
+  /** One entry of option value */
   public static final class OptionValue {
-    /**
-     * Name of command line option it detects
-     */
+    /** Name of command line option it detects */
     public final String name;
 
-    /**
-     * True if option name is a short name
-     */
+    /** True if option name is a short name */
     public final boolean shortName;
 
-    /**
-     * Detected value
-     */
+    /** Detected value */
     public final String value;
 
     OptionValue(String name, String value, boolean shortName) {
@@ -37,10 +29,12 @@ public final class CommandLine {
 
     @Override
     public String toString() {
-      return MoreObjects.toStringHelper(getClass().getSimpleName()).addValue(name).addValue(value)
-          .addValue(shortName).toString();
+      return MoreObjects.toStringHelper(getClass().getSimpleName())
+          .addValue(name)
+          .addValue(value)
+          .addValue(shortName)
+          .toString();
     }
-
   }
 
   private final List<String> arguments = new ArrayList<String>();
@@ -55,23 +49,21 @@ public final class CommandLine {
     this.optionValues.add(new OptionValue(name, value, shortName));
   }
 
-  /**
-   * @return List of arguments
-   */
+  /** @return List of arguments */
   public List<String> getArguments() {
     return arguments;
   }
 
-  /**
-   * @return List of option and values
-   */
+  /** @return List of option and values */
   public final List<OptionValue> getOptionValues() {
     return optionValues;
   }
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(getClass()).addValue(arguments).addValue(optionValues)
+    return MoreObjects.toStringHelper(getClass())
+        .addValue(arguments)
+        .addValue(optionValues)
         .toString();
   }
 }
