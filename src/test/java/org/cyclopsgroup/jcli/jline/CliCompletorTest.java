@@ -1,6 +1,7 @@
 package org.cyclopsgroup.jcli.jline;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.List;
