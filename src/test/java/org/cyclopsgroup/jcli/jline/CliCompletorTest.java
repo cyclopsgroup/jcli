@@ -1,8 +1,6 @@
 package org.cyclopsgroup.jcli.jline;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
+import static com.google.common.truth.Truth.assertThat;
 import java.beans.IntrospectionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,7 @@ public class CliCompletorTest {
     cc.complete(lineReader, parsedLine, candidates);
     String[] expecteds = {"-2", "-b", "-f", "-i", "11111", "22222", "33333"};
     for (int i = 0; i < expecteds.length; i++) {
-      assertThat(candidates.get(i).value(), is(expecteds[i]));
+      assertThat(candidates.get(i).value()).isEqualTo(expecteds[i]);
     }
   }
 
@@ -65,7 +63,7 @@ public class CliCompletorTest {
     cc.complete(lineReader, parsedLine, candidates);
     String[] expecteds = {"--boolean", "--field1", "--field2", "--tint"};
     for (int i = 0; i < expecteds.length; i++) {
-      assertThat(candidates.get(i).value(), is(expecteds[i]));
+      assertThat(candidates.get(i).value()).isEqualTo(expecteds[i]);
     }
   }
 
@@ -82,7 +80,7 @@ public class CliCompletorTest {
     cc.complete(lineReader, parsedLine, candidates);
     String[] expecteds = {"aaaa", "bbbb", "cccc"};
     for (int i = 0; i < expecteds.length; i++) {
-      assertThat(candidates.get(i).value(), is(expecteds[i]));
+      assertThat(candidates.get(i).value()).isEqualTo(expecteds[i]);
     }
   }
 
@@ -99,7 +97,7 @@ public class CliCompletorTest {
     cc.complete(lineReader, parsedLine, candidates);
     String[] expecteds = {"-2", "-b", "-f", "-i"};
     for (int i = 0; i < expecteds.length; i++) {
-      assertThat(candidates.get(i).value(), is(expecteds[i]));
+      assertThat(candidates.get(i).value()).isEqualTo(expecteds[i]);
     }
   }
 
@@ -116,7 +114,7 @@ public class CliCompletorTest {
     cc.complete(lineReader, parsedLine, candidates);
     String[] expecteds = {"--field1", "--field2"};
     for (int i = 0; i < expecteds.length; i++) {
-      assertThat(candidates.get(i).value(), is(expecteds[i]));
+      assertThat(candidates.get(i).value()).isEqualTo(expecteds[i]);
     }
   }
 
@@ -131,6 +129,6 @@ public class CliCompletorTest {
           }
         });
     cc.complete(lineReader, parsedLine, candidates);
-    assertThat(candidates.get(0).value(), is("aaaa"));
+    assertThat(candidates.get(0).value()).isEqualTo("aaaa");
   }
 }
