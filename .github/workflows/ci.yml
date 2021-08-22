@@ -1,4 +1,4 @@
-name: Build and release
+name: Test and package
 on: [push]
 jobs:
   build:
