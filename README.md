@@ -1,3 +1,5 @@
+![jcli](https://github.com/jiaqi/jcli/actions/workflows/verify.yml/badge.svg)
+
 # Introduction
 
 JCli is a Java annotation driven command line manipulation library. Today, there are more than enough command line argument tools for Java in open source world out there. JCli distincts from others for following reasons:

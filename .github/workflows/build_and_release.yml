@@ -1,0 +1,15 @@
+name: Maven release
+
+on:
+  push:
+    branches:
+      - main
+      - snapshot
+
+jobs:
+  build_and_release:
+    uses: cyclopsgroup/cyclopsgroup/.github/workflows/maven-release-snapshot.yml@main
+    secrets:
+      awsAccessKeyId: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      awsSecretkey: ${{ secrets.AWS_SECRET_KEY }}
+
