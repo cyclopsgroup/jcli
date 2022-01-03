@@ -1,4 +1,4 @@
-![jcli](https://github.com/jiaqi/jcli/actions/workflows/verify.yml/badge.svg)
+![jcli](https://github.com/cyclopsgroup/jcli/actions/workflows/verify.yml/badge.svg)
 
 # Introduction
 
